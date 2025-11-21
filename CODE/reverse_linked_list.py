@@ -6,7 +6,8 @@
 from LIB.lib__linked_list import *
 
 # |1 2|->|2 3|->|3 4|->|4 5|
-def reverse_linked_list(head):
+def reverse_linked_list(listObj):
+    head = listObj.head
     if ( (head is None) or (head.next is None) ):
         return(head)
     prev = None
@@ -18,14 +19,14 @@ def reverse_linked_list(head):
         print(f"Set curr.next to: {curr.next.data if (curr.next is not None) else 'None'}")
         prev = curr
         curr = next
-    head = prev
+    listObj.head = prev
     return(head)
 
 
 def test__reverse_linked_list():
     l1 = LinkedList.from_python_list([1,2,3,4])
     print(f"Original:");  print(l1.display())
-    reverse_linked_list(l1.head)
+    reverse_linked_list(l1)
     print(f"Reversed:");  print(l1.display())
 #################################################################################
 
