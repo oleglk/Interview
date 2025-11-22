@@ -1,9 +1,9 @@
 # reverse_linked_list.py
 
 # RELOAD:
-# import importlib;  import LIB.lib__linked_list;  importlib.reload(LIB.lib__linked_list);  from LIB.lib__linked_list import *;    import reverse_linked_list;  importlib.reload(reverse_linked_list);  from reverse_linked_list import *
+# import importlib;  import UTILS.lib__linked_list;  importlib.reload(UTILS.lib__linked_list);  from UTILS.lib__linked_list import *;    import reverse_linked_list;  importlib.reload(reverse_linked_list);  from reverse_linked_list import *
 
-from LIB.lib__linked_list import *
+from UTILS.lib__linked_list import *
 
 # |1 2|->|2 3|->|3 4|->|4 5|
 def reverse_linked_list(listObj):
