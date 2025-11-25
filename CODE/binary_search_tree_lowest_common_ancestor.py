@@ -9,7 +9,7 @@
 from binary_tree_level_order_traversal import *  # for "visualization"
 
 
-# The idea: based on BSD property that if both nodes are smaller/larger than parent-node, they are in the left/right subtree of the parent-node.
+# The idea: based on BST property that if both nodes are smaller/larger than parent-node, they are in the left/right subtree of the parent-node.
 
 class Node:
     def __init__(self, data):
@@ -33,7 +33,7 @@ def binary_search_tree_lowest_common_ancestor(root: Node,
         if ( (p.data > node.data) and (q.data > node.data) ):
             node = node.right  ## descend into right subtree
         else:
-            return(node)
+            return(node)       # 'node' in-between 'p' and 'q' => it's LCA
     return(None)  # for unexpected cases
     
 
