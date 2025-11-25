@@ -30,7 +30,7 @@ def binary_tree_inorder(root: Node):
         while ( current is not None ):
             stack.push(current)
             current = current.left
-        # process lowermost
+        # process lowermost node held in stack
         node = stack.pop()
         result.append(node.data)
         current = node.right  # arrange for traversing lowermost right subtree
