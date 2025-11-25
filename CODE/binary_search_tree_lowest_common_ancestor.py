@@ -34,6 +34,7 @@ def binary_search_tree_lowest_common_ancestor(root: Node,
             node = node.right  ## descend into right subtree
         else:
             return(node)
+    return(None)  # for unexpected cases
     
 
 def test__binary_search_tree_lowest_common_ancestor():
