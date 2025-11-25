@@ -18,21 +18,21 @@ class Node:
 
 class Queue:
     def __init__(self):
-        lst = []
+        self.lst = []
     def enqueue(self, x):
-        lst.append(x)
+        self.lst.append(x)
     def dequeue(self):
         if (self.is_empty()):
             raise Exception("dequeue(EMPTY)")
-        return(lst.pop(0))
+        return(self.lst.pop(0))
     def is_empty(self):
-        return(len(lst) == 0)
+        return(len(self.lst) == 0)
     def size(self):
-        return(len(lst))
+        return(len(self.lst))
 ##
 
 
-def binary_tree_level_order(root):
+def binary_tree_level_order(root: Node):
     """Traversal of binary tree nodes from left to right, level by level.
        Returns list of lists of per-level node-data values."""
     if (root is None):
@@ -52,7 +52,7 @@ def binary_tree_level_order(root):
                 queue.enqueue(node.left)
             if ( node.right is not None ):
                 queue.enqueue(node.right)
-            resListOfLists.append(levelNodes)  # done with current level
+        resListOfLists.append(levelNodes)  # done with current level
     return(resListOfLists)
 
 
@@ -62,3 +62,12 @@ def test__binary_tree_level_order():
     t1n0.left = t1n1;  t1n0.right = t1n2
     t1n3 = Node(3);    t1n4 = Node(4);     t1n5 = Node(5)
     t1n1.left = t1n3;  t1n1.right = t1n4;  t1n2.left = t1n5
+    t2n0 = Node(0)
+    t2n1 = Node(1);    t2n2 = Node(2)
+    t2n0.right = t2n1
+    t2n1.right = t2n2
+
+    for root in [t1n0, t2n0]:
+        byLevels = binary_tree_level_order(root)
+        print(f"Result: {byLevels}")
+
