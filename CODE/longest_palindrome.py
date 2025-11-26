@@ -49,7 +49,20 @@ def longest_str(s1, s2):
     return(s1 if len(s1) >= len(s2)  else  s2)
 
 
+def longest_palindrome__ChatGPT(s):
+    if not s:
+        return ''
+    def expand(l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1; r += 1
+        return s[l+1:r]
+    best = ''
+    for i in range(len(s)):
+        best = max(best, expand(i, i), expand(i, i+1), key=len)
+    return best
 
+
+
 def test__longest_palindrome():
     s1 = "012321";  s2 = "01";  s3 = "0";  s4 = "012210";
     s5 = "0123332101";  s6 = "01100123210"
