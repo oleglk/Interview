@@ -13,7 +13,7 @@
 minCoinsMemo = {}
 
 def _minimum_coins_recursive(coins: list, sum: int) -> int:
-    if ( sum = 0 ):
+    if ( sum == 0 ):
         return(0)
     minCoins = 999999
     for coin in coins:
@@ -22,10 +22,21 @@ def _minimum_coins_recursive(coins: list, sum: int) -> int:
                 currMin = minCoinsMemo[sum-coin]
             else:
                 currMin = _minimum_coins_recursive(coins, sum-coin)
+                minCoinsMemo[sum-coin] = currMin
             minCoins = min(minCoins, 1 + currMin)
     return(minCoins)
 
 
 def run_minimum_coins_recursive(coins: list, sum: int) -> int:
     minCoinsMemo = {}
-    return(_minimum_coins_recursive(coins, sum)
+    return(_minimum_coins_recursive(coins, sum))
+
+
+def test__minimum_coins_recursive():
+    coins = [1, 3, 5, 10]
+    sums = [1, 2, 6, 9, 13, 16]
+    for sum in sums:
+        print("======================")
+        print(f"Coins: {coins}, target: {sum}")
+        res = run_minimum_coins_recursive(coins, sum)
+        print(f"   => num-coins: {res}")
