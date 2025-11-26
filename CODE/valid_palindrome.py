@@ -19,11 +19,11 @@ def valid_palindrome(s: str) -> bool:
     while (i1 <= i2):
         # advance i1, i2 to next alphanumerics
         i1 += 1
-        print(f"@@ i1={i1}")
+        #print(f"@@ i1={i1}")
         while ( (i1 < i2) and (not s[i1].isalnum()) ):
             i1 += 1
         i2 -=1
-        print(f"@@ i2={i2}")
+        #print(f"@@ i2={i2}")
         while ( (i1 < i2) and (not s[i2].isalnum()) ):
             i2 -= 1
         if ( (i1 <= i2) and (s[i1].upper() != s[i2].upper()) ):
@@ -39,7 +39,11 @@ def test__valid_palindrome():
     s5 = "21123"
     s6 = "1234"
     s7 = "123421"
-    for s in [s1, s2, s3, s4, s5, s6, s7]:
+    s8 = "_"
+    s9 = "1_2__1_"
+    s10 = "_21_123_"
+    s11 = "123_3_2_1"
+    for s in [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11]:
         print("=================================")
         print(f"Input: {s}")
         res = valid_palindrome(s)
