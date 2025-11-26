@@ -9,8 +9,6 @@
 from binary_tree_level_order_traversal import *  # for "visualization"
 
 
-# The idea: based on BSD property that if both nodes are smaller/larger than parent-node, they are in the left/right subtree of the parent-node.
-
 class Node:
     def __init__(self, data):
         self.data = data
