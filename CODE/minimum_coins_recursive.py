@@ -9,27 +9,36 @@
 # The idea: for each coin-value min_coins = min(1 + min_coins(sum - coinVal))
 # (see: https://afteracademy.com/blog/minimum-coin-change/)
 
+class Solution:
+    positiveInf = 999999
+    def __init__(self, coins: list, sum: int):
+        self.minCoinsMemo = {}
+        self.coins = coins
+        self.target = sum
+        self.coins.sort()  # ascending
 
-minCoinsMemo = {}
 
-def _minimum_coins_recursive(coins: list, sum: int) -> int:
-    if ( sum == 0 ):
-        return(0)
-    minCoins = 999999
-    for coin in coins:
-        if ( coin <= sum ):
-            if ( (sum-coin) in minCoinsMemo ):
-                currMin = minCoinsMemo[sum-coin]
-            else:
-                currMin = _minimum_coins_recursive(coins, sum-coin)
-                minCoinsMemo[sum-coin] = currMin
+    def _minimum_coins_recursive(self, sum: int) -> int:
+        if ( sum == 0 ):
+            return(0)
+        if ( sum in self.minCoinsMemo ):
+            return(self.minCoinsMemo[sum])
+               
+        minCoins = Solution.positiveInf
+        for coin in self.coins:
+            if ( coin > sum ):
+                break  # this coin too large, others even larger due to sort
+            currMin = _minimum_coins_recursive(sum-coin)
             minCoins = min(minCoins, 1 + currMin)
-    return(minCoins)
+        self.minCoinsMemo[sum] = minCoins
+        return(minCoins)
 
-
-def run_minimum_coins_recursive(coins: list, sum: int) -> int:
-    minCoinsMemo = {}
-    return(_minimum_coins_recursive(coins, sum))
+    
+    @staticmethod
+    def run_minimum_coins_recursive(coins: list, sum: int) -> int:
+        sln = Solution()
+        res = _minimum_coins_recursive(self.target)
+        return(res if (res != Solution.positiveInf)  else  -1)
 
 
 def test__minimum_coins_recursive():
