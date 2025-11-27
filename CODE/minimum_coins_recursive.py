@@ -36,7 +36,15 @@ def test__minimum_coins_recursive():
     coins = [1, 3, 5, 10]
     sums = [1, 2, 6, 9, 13, 16]
     for sum in sums:
-        print("======================")
+        print("====possible==========")
+        print(f"Coins: {coins}, target: {sum}")
+        res = run_minimum_coins_recursive(coins, sum)
+        print(f"   => num-coins: {res}")
+    # impossible cases
+    coins = [3, 5, 10];
+    sums = [1, 2, 4, 7]
+    for sum in sums:
+        print("====impossible========")
         print(f"Coins: {coins}, target: {sum}")
         res = run_minimum_coins_recursive(coins, sum)
         print(f"   => num-coins: {res}")
