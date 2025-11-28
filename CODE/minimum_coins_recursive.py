@@ -7,7 +7,7 @@
 # import importlib;    import minimum_coins_recursive;  importlib.reload(minimum_coins_recursive);  from minimum_coins_recursive import *
 
 # The idea: for each coin-value min_coins = min(1 + min_coins(sum - coinVal))
-# (see: https://afteracademy.com/blog/minimum-coin-change/)
+# (see: https://www.stratascratch.com/blog/solving-leetcode-coin-change-problem-for-data-science-interviews/)
 
 class Solution:
     positiveInf = 999999
