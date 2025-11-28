@@ -13,7 +13,7 @@
 positiveInf = 999999
 
 def minimum_coins_iterative(coins: list, sum: int) -> int:
-    minCoinsArr = [positiveInf] * (sum+1)  # num of coins for amounts 0..sum
+    minCoinsArr = [positiveInf] * (sum+1)  # num of coins for amounts [0..sum]
     minCoinsArr[0] = 0  # no coins for sum of 0
 
     for coin in coins:

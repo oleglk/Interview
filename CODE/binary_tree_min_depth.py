@@ -8,6 +8,7 @@
 
 from binary_tree_level_order_traversal import *  # for "visualization"
 
+# The idea: recursion minDepth = 1 + min(min-depth among all existent subtrees)
 
 class Node:
     def __init__(self, data):

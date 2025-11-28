@@ -1,4 +1,4 @@
-# max_loot_recursive.py - Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount you can rob without robbing adjacent houses.
+# max_loot_recursive.py - Given a list of non-negative integers representing the amount of money in each house, determine the maximum amount you can rob without robbing adjacent houses.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from max_loot_recursive import *
@@ -6,6 +6,8 @@
 # RELOAD:
 # import importlib;    import max_loot_recursive;  importlib.reload(max_loot_recursive);  from max_loot_recursive import *
 
+# The idea: either rob the last house (#n-1) and skip pre-last house (#n-2),
+#              or skip the last house (#n-1) and rob  pre-last house (#n-2)
 
 def max_loot_recursive(houseVals):
     n = len(houseVals)
