@@ -46,6 +46,7 @@ def binary_tree_level_order(root: Node):
         levelNodes = []
         for i in range(0, numLevelNodes):
             # traverse one level of the tree - distinguished by count
+            # enqueue the next level
             node = queue.dequeue()
             levelNodes.append(node.data)
             if ( node.left is not None ):
