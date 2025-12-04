@@ -21,9 +21,8 @@ def can_segment_recursive(s: str, sLen: int, wordDict: dict, memo: list) -> bool
         if ( not subS.endswith(word) ):
             continue
         # the current substring ends with 'word'; check if prefix is segmentable
-        # TODO: just compute length(s), don't slice
-        prefix = subS[:-len(word)]  # if 'word' truncated
-        prefLength = len(prefix)
+        prefLength = len(subS) - len(word)
+        prefix = subS[:-len(word)]  # if 'word' truncated; only for debug prints
         print(f"@@ Substring '{subS}': prefix='{prefix}', ends with '{word}'")
         if ( memo[prefLength] != -1 ):
            canDoPrefix = memo[prefLength]
