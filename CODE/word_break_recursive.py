@@ -13,7 +13,7 @@ def word_break_recursive(s: str, wordDict: dict) -> bool:
     return(can_segment_recursive(s, wordDict, prefixMemo))
 
 
-def can_segment_recursive(s: str, wordDict: dict, memo: dict) -> bool:
+def can_segment_recursive(s: str, wordDict: dict, memo: list) -> bool:
     if ( s == '' ):
         return(1)  # base case - string either was empty or depleted
     for word in wordDict:
