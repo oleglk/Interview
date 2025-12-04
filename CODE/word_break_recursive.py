@@ -9,21 +9,22 @@
 prefixMemo = [];  # for memoization - -1|0|1 indexed by prefix length
 
 def word_break_recursive(s: str, wordDict: dict) -> bool:
-    prefixMemo = [-1]*(len(s)+1)  # length from 0 to len() inclusive
+    prefixMemo = [-1]*(len(s)+1)  # lengths from 0 to len() inclusive
     return(can_segment_recursive(s, len(s), wordDict, prefixMemo))
 
 
 def can_segment_recursive(s: str, sLen: int, wordDict: dict, memo: list) -> bool:
     if ( (s == '') or (sLen == 0) ):
         return(1)  # base case - string either was empty or depleted
-    s = s[:sLen]   # this iteration takes 'sLen' first characters
+    subS = s[:sLen]   # this iteration takes 'sLen' first characters
     for word in wordDict:
-        if ( not s.endswith(word) ):
+        if ( not subS.endswith(word) ):
             continue
         # the current substring ends with 'word'; check if prefix is segmentable
-        prefix = s[:-len(word)]  # if 'word' truncated
+        # TODO: just compute length(s), don't slice
+        prefix = subS[:-len(word)]  # if 'word' truncated
         prefLength = len(prefix)
-        print(f"@@ Substring '{s}': prefix='{prefix}', ends with '{word}'")
+        print(f"@@ Substring '{subS}': prefix='{prefix}', ends with '{word}'")
         if ( memo[prefLength] != -1 ):
            canDoPrefix = memo[prefLength]
            print(f"@@@@ Used memoized answer={canDoPrefix} for prefix '{prefix}'")
