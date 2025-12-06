@@ -1,7 +1,12 @@
-# lib__double_linked_list.py - double linked list implementation from https://chalmersgu-data-structure-courses.github.io/OpenDSA/Published/ChalmersGU-DSABook/html/ListDouble.html
+# lib__double_linked_list.py - double linked list implementation 
+
+# LOAD:
+# import sys;  import os;  sys.path.insert(0, os.getcwd());  from UTILS.lib__double_linked_list import *
+
+# RELOAD:
+# import importlib;  import UTILS.lib__double_linked_list;  importlib.reload(UTILS.lib__double_linked_list);  from UTILS.lib__double_linked_list import *
 
 
-# Python does not have internal classes, so we have to make the list node standalone.
 class DoubleLinkedListNode:
     def __init__(self, elem, prev, next):
         self.elem = elem   # Value for this node
@@ -10,82 +15,87 @@ class DoubleLinkedListNode:
 ####
 
 
-class DoubleLinkedList(List):
+class DoubleLinkedList:
     def __init__(self):
         self._head = None    # Pointer to list header
         self._tail = None    # Pointer to list tail
         self._listSize = 0   # Size of list
 
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        return current.elem
 
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        old = current.elem
-        current.elem = x
-        return old
-
-    def add(self, i, x):
-        if not (0 <= i <= self._listSize): raise IndexError("list index out of range")
-        if self._listSize == 0:
-            self._head = self._tail = DoubleLinkedListNode(x, None, None)
-        elif i == 0:
-            newhead = DoubleLinkedListNode(x, None, self._head)
-            self._head.prev = newhead
-            self._head = newhead
-        elif i == self._listSize:
-            newtail = DoubleLinkedListNode(x, self._tail, None)
-            self._tail.next = newtail
-            self._tail = newtail
+    def add_in_head(self, x):
+        was_empty = self.is_empty()
+        newNode = DoubleLinkedListNode(x, None, self._head)
+        if ( not was_empty ):
+            self._head.prev = newNode
         else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            next  = prev.next
-            newnode = DoubleLinkedListNode(x, prev, next)
-            prev.next = newnode
-            next.prev = newnode
+            self._tail = newNode
+        self._head = newNode
         self._listSize += 1
 
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        if i == 0:
-            removed = self._head
-            self._head = removed.next
-            self._head.prev = None
-        elif i == self._listSize-1:
-            removed = self._tail
-            self._tail = removed.prev
-            self._tail.next = None
+
+    def add_in_tail(self, x):
+        was_empty = self.is_empty()
+        newNode = DoubleLinkedListNode(x, self._tail, None)
+        if ( not was_empty ):
+            self._tail.next = newNode
         else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            removed = prev.next
-            prev.next = removed.next
-            prev.next.prev = prev
-        removed.prev = removed.next = None   # For garbage collection
+            self._head = newNode
+        self._tail = newNode
+        self._listSize += 1
+
+
+    def delete_by_node(self, node):
+        """Deletes list member 'node'"""
+        if ( node is None ):
+            raise Exception("delete_by_node(None)")
+        if ( node.prev is not None):  # not the first node
+            node.prev.next = node.next
+        else:
+            self._head = node.next
+        if ( node.next is not None):  # not the last node
+            node.next.prev = node.prev
+        else:
+            self._tail = node.prev
         self._listSize -= 1
-        return removed.elem
 
-    def isEmpty(self):
-        return self._listSize == 0
 
+    def delete_first_by_elem(self, x):
+        """Deletes 1st occurence of a node with element == 'x'
+           Returns True if deletion occured"""
+        node = self._head
+        while ( (node is not None) and (node.elem != x) ):
+            node = node.next
+        if ( node is not None ):  # 'x' found
+            self.delete_by_node(node)
+            return(True)
+        else:                     # 'x' not found
+            return(False)
+
+        
+    def is_empty(self):
+        return(self._head is None)
+
+    
     def size(self):
         return self._listSize
 
-    def __iter__(self):
-        current = self._head
-        while current is not None:
-            yield current.elem
-            current = current.next
-####
 
+    def content_to_string(self):
+        s = ""
+        node = self._head
+        while ( node is not None ):
+            s += " >> " + str(node.elem)
+            node = node.next
+        return(s)
 
+    
+    #staticmethod
+    def from_python_list(pyList):
+        lst = DoubleLinkedList()
+        if ( not pyList ):
+            return(lst)
+        for x in pyList:
+            lst.add_in_tail(x)
+        return(lst)
+
+######
