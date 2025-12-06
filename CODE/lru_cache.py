@@ -4,22 +4,56 @@
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from lru_cache import *
 
 # RELOAD:
-# import importlib; import lru_cache; importlib.reload(lru_cache); from lru_cache import *
+# import importlib;  import UTILS.lib__double_linked_list;  importlib.reload(UTILS.lib__double_linked_list);  from UTILS.lib__double_linked_list import *;    import lru_cache; importlib.reload(lru_cache); from lru_cache import *
 
 
-# The idea: doubly linked list of key-value pairs in LRU order and dictionary of key::list-item. Most recently used item added to the head of the list.
+# The idea: doubly linked list of key-value pairs in LRU order and dictionary of key::list-item. Most recently used item added to the head of the list. Accessed existent item moved to the head of the list.
+
+from UTILS.lib__double_linked_list import *
 
 
 class LRUCache:
-    def __init__(self):
-        self.keyToIdx = {}
+    def __init__(self, capacity):
+        if ( capacity == 0 ):
+            raise Exception("capacity == 0")
+        self.capacity = capacity
+        self.keyToListNode = {}
         self.keysAndVals = DoubleLinkedList()
 
 
     def put(self, key, val):
-        if ( key in self.keyToIdx ):
+        print(f"-I- put({key}, {val})")
+        if ( key in self.keyToListNode ):
             # find and remove the old key-value pair
-            oldIdx = self.keyToIdx[key]
-            self.keyToIdx[key] = 0  # will be made most-recently-used
-            self.keysAndVals.pop(oldIdx)  # old key-value pair not needed
-        # insert the new 
+            oldNode = self.keyToListNode[key]
+            self.keysAndVals.delete_by_node(oldNode)
+        if ( len(self.keyToListNode) == self.capacity ):
+            self._discard_oldest()
+        # insert the new key-value pair
+        newNode = self.keysAndVals.add_in_tail((key, val))
+        self.keyToListNode[key] = newNode
+
+
+    def get(self, key):
+        print(f"-I- get({key})")
+        if ( key not in self.keyToListNode ):
+            return(None)
+        theNode = self.keyToListNode[key]
+        self.keysAndVals.move_to_tail(theNode)
+        return(theNode[1])
+
+
+    def _discard_oldest(self):
+        keyAndVal = self.keysAndVals.delete_head()
+        if ( keyAndVal is None ):
+            return  # was empty
+        key, val = keyAndVal
+        del self.keyToListNode[key]
+        print(f"-I- Discarded LRU ({key}, {val})")
+########
+
+
+def test__lru_cache():
+    cache = LRUCache(4)
+    for k in range(0, 6):
+        cache.put(k, f"val_{k}")

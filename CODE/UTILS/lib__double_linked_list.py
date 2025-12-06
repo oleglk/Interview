@@ -31,6 +31,7 @@ class DoubleLinkedList:
             self._tail = newNode
         self._head = newNode
         self._listSize += 1
+        return(newNode)
 
 
     def add_in_tail(self, x):
@@ -42,6 +43,7 @@ class DoubleLinkedList:
             self._head = newNode
         self._tail = newNode
         self._listSize += 1
+        return(newNode)
 
 
     def delete_by_node(self, node):
@@ -59,6 +61,15 @@ class DoubleLinkedList:
         self._listSize -= 1
 
 
+    def delete_head(self):
+        """Deletes the head node and returns its data element"""
+        if ( self.is_empty() ):
+            return
+        oldHead = self._head
+        self.delete_by_node(oldHead)
+        return(oldHead.elem)
+
+
     def delete_first_by_elem(self, x):
         """Deletes 1st occurence of a node with element == 'x'
            Returns True if deletion occured"""
@@ -70,6 +81,12 @@ class DoubleLinkedList:
             return(True)
         else:                     # 'x' not found
             return(False)
+
+
+    def move_to_tail(self, node):
+        data = node.elem
+        self.delete_by_node(node)
+        self.add_in_tail(data)
 
         
     def is_empty(self):
