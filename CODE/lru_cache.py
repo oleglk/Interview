@@ -7,7 +7,7 @@
 # import importlib;  import UTILS.lib__double_linked_list;  importlib.reload(UTILS.lib__double_linked_list);  from UTILS.lib__double_linked_list import *;    import lru_cache; importlib.reload(lru_cache); from lru_cache import *
 
 
-# The idea: doubly linked list of key-value pairs in LRU order and dictionary of key::list-item. Most recently used item added to the head of the list. Accessed existent item moved to the head of the list.
+# The idea: doubly linked list of key-value pairs in LRU order and dictionary of key::list-item. Most recently used item added to the tail of the list. Accessed existent item moved to the tail of the list.
 
 from UTILS.lib__double_linked_list import *
 
@@ -40,7 +40,7 @@ class LRUCache:
             return(None)
         theNode = self.keyToListNode[key]
         self.keysAndVals.move_to_tail(theNode)
-        return(theNode[1])
+        return(theNode.elem[1])
 
 
     def _discard_oldest(self):
@@ -56,4 +56,7 @@ class LRUCache:
 def test__lru_cache():
     cache = LRUCache(4)
     for k in range(0, 6):
-        cache.put(k, f"val_{k}")
+        cache.put(k, f"val_{k}")  # 0 and 1 should be discarded
+    node2 = cache.get(2)          # refresh 2 - make 3 LRU
+    cache.put(6, "val_6")         # expected content: 2 4 5 6
+    print(f"Result: {cache.keysAndVals.content_to_string()}")
