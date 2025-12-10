@@ -15,30 +15,38 @@
 # - if w1[m-1] != w2[n-1], try replace w1[m-1] by w2[n-1] and recurse(m-1, n-1)
 
 
-def edit_distance_recurse(word1, word2, m, n):
+def edit_distance_recurse(word1, word2, m, n, memo):
     if ( m == 0 ):
         #print(f"@@ at{m},{n}: m=0, return({n})")
         return(n)  # need to insert the whole of 'word2'
     if ( n == 0 ):
         #print(f"@@ at{m},{n}: n=0, return({m})")
         return(m)  # need to delete the whole of 'word1'
+
+    if ( memo[m][n] != -1 ):
+        return(memo[m][n])
     
     if ( word1[m-1] == word2[n-1] ):
-        whenEqual = edit_distance_recurse(word1, word2, m-1, n-1)
+        whenEqual = edit_distance_recurse(word1, word2, m-1, n-1, memo)
+        memo[m][n] = whenEqual
         #print(f"@@ at{m},{n}: whenEqual m={m}, n={n} => {whenEqual}")
         return(whenEqual)
 
     # word1[m-1] != word2[n-1], choose min btw the 3 cases
-    whenDeleted  = edit_distance_recurse(word1, word2, m-1, n)
-    whenInserted = edit_distance_recurse(word1, word2, m,   n-1)
-    whenReplaced = edit_distance_recurse(word1, word2, m-1, n-1)
+    whenDeleted  = edit_distance_recurse(word1, word2, m-1, n,   memo)
+    whenInserted = edit_distance_recurse(word1, word2, m,   n-1, memo)
+    whenReplaced = edit_distance_recurse(word1, word2, m-1, n-1, memo)
     theMin = min(whenDeleted, whenInserted, whenReplaced)
     #print(f"@@ whenDeleted={whenDeleted}, whenInserted={whenInserted}, whenReplaced={whenReplaced} ==> {theMin}")
-    return(1 + theMin)
+    memo[m][n] = 1 + theMin
+    return(memo[m][n])
 
 
 def edit_distance(word1, word2):
-    return(edit_distance_recurse(word1, word2, len(word1), len(word2)))
+    n1 = len(word1)
+    n2 = len(word2)
+    memo = [[-1 for j in range(0, n2+1)] for i in range(0, n1+1)]
+    return(edit_distance_recurse(word1, word2, n1, n2, memo))
 
 
 def test__edit_distance():
