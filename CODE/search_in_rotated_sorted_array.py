@@ -25,9 +25,9 @@ def find_smallest(arr: list) -> int:
         else:                       # left part contains the break, go left
             hi = mid        # #mid included - we didn't compare it to left part
 
-        # hint? return lo, since lo>hi and we have ...max,min,...
-        #       while looking for min
-        return(lo)  #
+    # hint? return lo, since lo>hi and we have ...max,min,...
+    #       while looking for min
+    return(lo)  #
 
 
 def binary_search(arr: list, lo: int, hi: int, target:int) -> int:
