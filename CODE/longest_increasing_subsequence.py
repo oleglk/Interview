@@ -6,7 +6,7 @@
 # RELOAD:
 # import importlib; import longest_increasing_subsequence; importlib.reload(longest_increasing_subsequence); from longest_increasing_subsequence import *
 
-# The idea: (DP) max length of a segment ending on #i: L[i] = max(L[i], [L[j]+1 for all j<i if A[j]<A[i].
+# The idea: (DP) max length of a segment ending on #i: L[i] = max(L[i], L[j]+1) for all j<i if A[j]<A[i].
 
 
 def longest_increasing_subsequence(nums: list) -> int:
@@ -18,7 +18,7 @@ def longest_increasing_subsequence(nums: list) -> int:
 
     for i in range(1, n):
         for j in range(0, i):
-            if ( nums[j] < nums[i] ):
+            if ( nums[j] < nums[i] ):  # element #i can follow element #j
                 maxLength[i] = max(maxLength[i], (maxLength[j]+1))
     return(maxLength[n-1])
 
