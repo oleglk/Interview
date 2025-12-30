@@ -7,7 +7,9 @@
 # import importlib; import majority_element; importlib.reload(majority_element); from majority_element import *
 
 
-# The idea:  Boyer-Moore Voting Algorithm
+# The idea:  Boyer-Moore Voting Algorithm:
+## If the vote count becomes 0, select the current element as the new candidate and set votes = 1.
+## Otherwise, if the current element matches the candidate, increase the vote count; if it does not match, decrease the vote count.
 
 
 def majority_element(arr: list[int]) -> int:
