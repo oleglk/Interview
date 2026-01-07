@@ -35,7 +35,7 @@ def regexp_recurse(inpStr: str, pattern: str, iS: int, iP: int) -> bool:
         return (ret1 or ret2)
     else:
         # next character is not '*'; require exact match
-        if ( inpStr[iS] != pattern[iP] ):
+        if ( (inpStr[iS] != pattern[iP]) and not (pattern[iP] == ".") ):
             return False
         return regexp_recurse(inpStr, pattern, iS+1, iP+1)
 
