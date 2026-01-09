@@ -12,8 +12,7 @@ def regexp_recurse(inpStr: str, pattern: str) -> bool:
     if ( len(pattern) == 0 ):
         return( len(inpStr) == 0 )
 
-    firstCharMatches = (len(inpStr)) > 0) and
-    ((inpStr[0] == pattern[0]) or (pattern[0] == '.'))
+    firstCharMatches = (len(inpStr) > 0) and ((inpStr[0] == pattern[0]) or (pattern[0] == '.'))
     
     # check for '*'
     if ( (len(pattern) > 1) and (pattern[1] == '*') ):
@@ -21,3 +20,22 @@ def regexp_recurse(inpStr: str, pattern: str) -> bool:
         # when 1st pattern char is used, it can match multiple input chars
         resIgnoreFirst = regexp_recurse(inpStr, pattern[2:])
         resUseFirst = firstCharMatches and regexp_recurse(inpStr[1:], pattern)
+        return resIgnoreFirst or resUseFirst
+    else:
+        return firstCharMatches and regexp_recurse(inpStr[1:], pattern[1:])
+
+
+def test__regexp_recurse():
+    tasks = [
+        ["aa", "a"],    # False
+        ["aa", "a*"],   # True
+        ["ab", ".*"],   # True
+        ["abc", "abc"], # True
+        ["abc", "abd"], # False
+        ["obc", "abc"]  # False
+    ]
+    for inpStr, pattern in tasks:
+        print("================================")
+        print(f"Input: {inpStr},  pattern={pattern}")
+        res = regexp_recurse(inpStr, pattern)
+        print(f"Result: {res}")
