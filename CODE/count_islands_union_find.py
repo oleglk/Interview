@@ -7,10 +7,11 @@
 # import importlib; import count_islands_union_find; importlib.reload(count_islands_union_find); from count_islands_union_find import *
 
 
-# The idea: init to every land cell being a separate island, then merge adjacent land cells in 4 directions.
+# The idea: init to every land cell being a separate island, then merge adjacent land cells in 4 directions. Actually it's enough to "look" right and down from current cell. Islands-being-built represented by disjoint sets. Member in the set is a single index for grid-cell position.
 
 
 class CountIslands:
+    # Value 1 in the grid cell means land, 0 means water.
     def __init__(self, grid: list[list[bool]]) -> None:
         self.grid = grid
         self.nRows = len(grid)
