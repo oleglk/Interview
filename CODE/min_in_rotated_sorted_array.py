@@ -12,11 +12,17 @@
 # b) If arr[mid] <= arr[high] //8 1 2 3 4 5 6 7//6 7 8 1 2 3 4 5//, right part is sorted - continue searching in the left part => high = mid.
 # Termination condition: if low < high, the current subarray is sorted, and low is the minimum.
 
-from typing import TypeVar
+from typing import Protocol, TypeVar, Any
 
-ElemType = TypeVar("ElemType", int, float)
+#ElemType = TypeVar("ElemType", bound="Comparable")
 
-def min_in_rotated_sorted_array(arr: list[ElemType]) -> ElemType:
+class Comparable(Protocol):
+    def __lt__(self, other: Any, /) -> bool: ...
+    def __gt__(self, other: Any, /) -> bool: ...
+    def __eq__(self, other: Any, /) -> bool: ...
+    
+
+def min_in_rotated_sorted_array(arr: list[Comparable]) -> Comparable:
     if (len(arr) == 1): return arr[0]
     lo = 0
     hi = len(arr) - 1
