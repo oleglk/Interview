@@ -7,7 +7,14 @@
 # import importlib; import pow; importlib.reload(pow); from pow import *
 
 
-# The idea: repeatedly square as much as needed; handle odd power by making last multiplication. Use reciprocal for negative power.
+# The idea: follow binary representation of the exponent:
+# x^11 = x^8 * x^2 * x^1       : 11 = 1011b
+# x^11 = ((x^2)^2)^2 * 1       * x^2 * x
+##       1             0         1     1
+# x^15 = x^8 * x^4 * x^2 * x^1 : 15 = 1111b
+# x^15 = ((x^2)^2)^2 * (x^2)^2 * x^2 * x
+##       1             1         1     1
+
 ## x^5 == (x^2)^2 * x
 ## 5/2=2; 2/2=1, so square while n > 1, halve n each time
 
@@ -18,6 +25,13 @@ def binary_exponent(x: float, n: int) -> float:
     if ( x == 0 ):
         return 0
     exp = n if (n > 0) else -n
+    negativeRes = (x < 0) and (n%2 != 0)
+    if ( x < 0 ):
+        x = -x  # remember to negate in the end
+
+    TODO
+
+
     
     res = x
     while ( exp > 1 ):
