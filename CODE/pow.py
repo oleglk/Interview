@@ -7,19 +7,13 @@
 # import importlib; import pow; importlib.reload(pow); from pow import *
 
 
-# The idea: follow binary representation of the exponent:
-# x^11 = x^8 * x^2 * x^1       : 11 = 1011b
-# x^11 = ((x^2)^2)^2 * 1       * x^2 * x
-##       1             0         1     1
-# x^15 = x^8 * x^4 * x^2 * x^1 : 15 = 1111b
-# x^15 = ((x^2)^2)^2 * (x^2)^2 * x^2 * x
-##       1             1         1     1
-
-## x^5 == (x^2)^2 * x
-## 5/2=2; 2/2=1, so square while n > 1, halve n each time
-
+# The idea (for x^n):
+# - if n is 0, x^n = 1
+# - if n is even, x^n = ( x^(n/2) )^2
+# - if n is odd, x^n = x*( x^((n-1)/2) )^2
 
 def binary_exponent(x: float, n: int) -> float:
+    """Recursively computes x^n for any x and any integer n"""
     if ( n == 0 ):
         return 1
     if ( x == 0 ):
@@ -29,25 +23,33 @@ def binary_exponent(x: float, n: int) -> float:
     if ( x < 0 ):
         x = -x  # remember to negate in the end
 
-    TODO
-
-
-    
-    res = x
-    while ( exp > 1 ):
-        res = res * res
-        exp = exp // 2
-        
-    if ( ((abs(n) % 2) != 0) and (abs(n) != 1) ):  # odd power
-        res = res * x
-    if ( n < 0 ):                                  # negative power
+    res = binary_exponent_rec(x, exp)
+    if ( n < 0 ):
         res = 1 / res
-
+    if ( negativeRes ):
+        res = -res
     return res
 
 
+def binary_exponent_rec(x: float, n: int) -> float:
+    """Recursively computes x^n for x >= 0 and integer n >= 0"""
+    if ( n == 0 ):
+        return 1
+    if ( x == 0 ):
+        return 0
+
+    # if n is even, n/2==n//2; if n is odd, (n-1)/2==n//2
+    res1 = binary_exponent_rec(x, n // 2)
+    if ( n%2 == 0 ):
+        res = res1 * res1
+    else:
+        res = x * res1 * res1
+    return res
+
+
+
 def test__binary_exponent():
-    tasks = [[2,4], [2,5], [2,-5], [3,1], [3,-1], [3,2], [3,3]]
+    tasks = [[2,4], [2,5], [2,-5], [3,1], [3,-1], [-3,2], [-3,3], [3,13]]
     for x, n in tasks:
         print("===================================")
         print(f"x={x}, n={n}, expected: {x**n}")
