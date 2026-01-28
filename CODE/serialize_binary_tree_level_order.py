@@ -25,24 +25,29 @@ class Node:
 
 def serialize_binary_tree_level_order(root: Optional[Node]) -> str:
     if (root is None):
-        return " None"
+        return ""
     queue = deque([root])
-    res = ""
+    res = []  # list instead of string to allow trimming trailing blanks
 
     while ( queue ):
         node = queue.popleft()
         if ( node is not None ):
-            res += f" {node.data}"
+            res.append(node.data)  # insert the current node
             if ( node.left is not None ):
-                queue.append(node.left)
+                queue.append(node.left)  # schedule the left child
             else:
-                queue.append(None)
+                queue.append(None)  # schedule placeholder of the left child
             if ( node.right is not None ):
-                queue.append(node.right)
+                queue.append(node.right) # schedule the right child
             else:
-                queue.append(None)
+                queue.append(None)  # schedule placeholder of the right child
         else:
-            res += " None"
+            res.append(None)
+
+    #print(f"@@ Before trim: {res}")
+    # trim trailing blanks (None-s)
+    while ( res and (res[-1] is None) ):
+        res.pop()  # delete the last None
     return res
 ##
 
