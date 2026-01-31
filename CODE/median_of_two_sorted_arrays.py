@@ -7,6 +7,9 @@
 # import importlib; import median_of_two_sorted_arrays; importlib.reload(median_of_two_sorted_arrays); from median_of_two_sorted_arrays import *
 
 
+# The idea (naive): virtually merge the arrays by running with two indices on them until the smaller median; for even-total-size another step gives larger median.
+
+
 def median_of_two_sorted_arrays(arr1: list, arr2: list) -> int:
     n1 = len(arr1)
     n2 = len(arr2)
@@ -43,8 +46,8 @@ def median_of_two_sorted_arrays(arr1: list, arr2: list) -> int:
 
 
 def pick_next(arr1, arr2, i1, i2):
-    """Chooses next min element of two arrays.
-       Returns (i1, i2, nextElem). At end nextElem=None."""
+    """Chooses next min element of two arrays starting from after i1, i2.
+       Returns ((updated)i1, (updated)i2, nextElem). At end nextElem=None."""
     n1 = len(arr1)
     n2 = len(arr2)
     if ( (i1 < -1) or (i2 < -1) or (i1 >=n1) or (i2 >= n2) ):
