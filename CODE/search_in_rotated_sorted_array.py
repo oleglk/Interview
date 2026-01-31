@@ -7,7 +7,8 @@
 # import importlib; import search_in_rotated_sorted_array; importlib.reload(search_in_rotated_sorted_array); from search_in_rotated_sorted_array import *
 
 
-# The idea: first find the "break" index - that of the smallest element in the array, then regular binary search in one of two sorted halves.
+# The idea: first find the "break" index - that of the smallest element in the array, then regular binary search in one of two sorted parts.
+# Example of rotated array: [6,7,8,1,2,3,4,5]
 
 def find_smallest(arr: list) -> int:
     lo = 0
@@ -21,7 +22,7 @@ def find_smallest(arr: list) -> int:
             return(lo)  # the whole subarray sorted - no break, 1st is smallest
         mid = (lo + hi) // 2
         if ( arr[mid] > arr[hi] ):  # right part contains the break, go right
-            lo = mid + 1    # #mid excluded, since it's > #hi
+            lo = mid + 1    # #mid excluded, since it's > #hi (thus not the min)
         else:                       # left part contains the break, go left
             hi = mid        # #mid included - we didn't compare it to left part
 
