@@ -11,6 +11,12 @@ from binary_tree_level_order_traversal import *  # for "visualization"
 
 
 # The idea: inorder traversal of a valid BST produces non-decreasing sequence.
+# See https://algo.monster/liteproblems/98 .
+# BST properties to be checked:
+# - Every node in the left subtree of a node must have values strictly less than that node's value.
+# - Every node in the right subtree of a node must have values strictly greater than that node's value
+# - Both the left and right subtrees themselves must also be valid BSTs
+
 
 class Node:
     def __init__(self, data):
@@ -29,10 +35,13 @@ def is_bst_inorder(root: Node, prev: list)-> bool:
     if ( is_bst_inorder(root.left, prev) == False ):
         return(False)  # left subtree violates
 
+    # 'prev[0]' must hold the largest value from the left subtree
     if ( root.data <= prev[0] ):
         return(False)
     prev[0] = root.data
 
+    # during verification of the right subtree
+    #   we'll check if its root is larger than the current node
     return(is_bst_inorder(root.right, prev))
 
 
