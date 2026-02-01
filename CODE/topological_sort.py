@@ -15,7 +15,7 @@
 # --      (items are {vertex :: list-of-neighbours})
 # - In-degrees held in {vertex :: in-degree} dictionary
 # - 0-degrees vertices move through a FIFO queue
-# - Result is an ordered lists
+# - Result is an ordered list
 
 from collections import deque
 
@@ -25,8 +25,14 @@ def _calc_indegrees(adjLists: dict) -> dict:
     for vertex in adjLists.keys():
         vertexToInDegree[vertex] = 0  # init all in-degrees to 0
     for targets in adjLists.values():
+        # 'targets' is list of edge-target vertices
+        # count how many times a vertex appears as edge-target
         for edgeTarget in targets:
-            vertexToInDegree[edgeTarget] += 1
+            if ( edgeTarget not in vertexToInDegree ):
+                # in case 'edgeTarget' doesn't appear as source/key, init it now
+                vertexToInDegree[edgeTarget] = 1
+            else:
+                vertexToInDegree[edgeTarget] += 1
     return(vertexToInDegree)
 
 
@@ -49,7 +55,7 @@ def topological_sort(adjLists: dict) -> list:
     while ( len(queue) > 0 ):
         zeroInVertex = queue.popleft()
         sortedList.append(zeroInVertex)
-        # update neighbours of 'zeroInVertex'
+        # update neighbours of 'zeroInVertex' - reduce their incoming degrees
         for target in adjLists[zeroInVertex]:
             vertexToInDegree[target] -= 1
             if ( vertexToInDegree[target] == 0 ):  # 'target' becomes 0-in
