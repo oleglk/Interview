@@ -35,11 +35,11 @@ def courses_schedule(numCourses: int, prerequisitePairs: list) -> list:
     
 
 
-def _calc_indegrees(adjLists: dict) -> dict:
+def _calc_indegrees(adjLists: dict[int, list[int]]) -> dict[int, int]:
     vertexToInDegree = {}
-    for vertex in adjLists.keys():
+    for vertex in adjLists.keys():  # all vertices appear there
         vertexToInDegree[vertex] = 0  # init all in-degrees to 0
-    for targets in adjLists.values():
+    for targets in adjLists.values(): # 'adjLists' == {src :: [list-of-targets]}
         for edgeTarget in targets:
             vertexToInDegree[edgeTarget] += 1
     return(vertexToInDegree)
@@ -47,7 +47,7 @@ def _calc_indegrees(adjLists: dict) -> dict:
 
 # 'adjLists' is dict {vertex :: list-of-neighbours}
 # Returns topologically sorted list of vertices
-def topological_sort(adjLists: dict) -> list:
+def topological_sort(adjLists: dict[int, list[int]]) -> list[int]:
     if ( len(adjLists) == 0 ):
         return([])
     vertexToInDegree = _calc_indegrees(adjLists)

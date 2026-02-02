@@ -7,6 +7,8 @@
 # import importlib; import courses_schedule_2; importlib.reload(courses_schedule_2); from courses_schedule_2 import *
 
 
+# The idea: perform topological sort; a cycle has no zero-in-degree vertex, thus not included in topological order; compare number of ordered cources with the total number of courses.
+
 from collections import defaultdict, deque
 
 def courses_schedule_2(numCourses: int, prerequisitePairs: list) -> list:
