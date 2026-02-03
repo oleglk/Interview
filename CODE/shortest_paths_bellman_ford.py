@@ -17,7 +17,7 @@
 def shortest_paths_bellman_ford(edges: list, vertices: list, srcId: int) -> dict:
     """edges = list of (nodeId1, nodeId2, weight)
        vertices = list of nodeId
-       Returns dice of (nodeId, min-dist) or None if negative cycle found."""
+       Returns dict of (nodeId, min-dist) or None if negative cycle found."""
     numNodes = len(vertices)
     dist = {node:float('inf') for node in vertices}
     dist[srcId] = 0
