@@ -12,9 +12,11 @@
 
 # The idea - Kosaraju algorithm:
 # 1. call DFS1 on G to compute finishing times u:f for each vertex u - build a list representing finishing order
-# 2. compute G-Transpose
+# 2. compute G-Transpose - where all edges are reversed
 # 3. call DFS2 on G-Transpose, but in the main loop of DFS, consider the vertices in order of decreasing u:f (as computed in line 1- take from reversed order-list)
 # 4. output the vertices of each tree in the depth-first forest formed in line 3 as a separate strongly connected component
+
+# The algorithm works, since during step (3) all edges leading outside of the current SCC go to already visited components.
 
 
 from collections import defaultdict
