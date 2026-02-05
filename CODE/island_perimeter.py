@@ -6,7 +6,7 @@
 # RELOAD:
 # import importlib; import island_perimeter; importlib.reload(island_perimeter); from island_perimeter import *
 
-# The idea: scan the grid and add 1 for each water-boundary edge of land cells. E.g. pick land cells and chheck their boundaries.
+# The idea: scan the grid and add 1 for each water-boundary edge of land cells. E.g. pick land cells and check their boundaries.
 
 
 def island_perimeter(grid: list) -> int:
