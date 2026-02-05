@@ -10,6 +10,33 @@ from binary_tree_level_order_traversal import *  # for "visualization"
 
 
 # The idea: inorder traversal using explicit stack
+# A walkthrough:
+#      5
+#    /   \
+#   2     7
+#  / \   / \
+# 1   4 6   8
+#    /
+#   3 
+# init makes stack <1<2<5
+# 1) get_next() returns '1'; since '1' has no right subtree, does nothing more
+# stack: <2<5<
+# 2) get_next() returns '2'; since '2' has right subtree, pushes its left part
+# stack: <3<4<5<
+# 3) get_next() returns '3'; since '3' has no right subtree, does nothing more
+# stack: <4<5<
+# 4) get_next() returns '4'; since '4' has no right subtree, does nothing more
+# stack: <5<
+# 5) get_next() returns '5'; since '5' has right subtree, pushes its left part
+# stack: <6<7<
+# 6) get_next() returns '6'; since '6' has no right subtree, does nothing more
+# stack: <7<
+# 7) get_next() returns '7'; since '7' has right subtree, pushes its left part
+# stack: <8<
+# 8) get_next() returns '8'; since '8' has no right subtree, does nothing more
+# stack: <
+# 9) has_next() returns False
+
 
 class Node:
     def __init__(self, data):
@@ -33,7 +60,8 @@ class BSTIterator:
         if ( not self.has_next() ):
             return(None)
         theNext = self.stack.pop()
-        # the next smallest element will be in the right subtree if any
+        # if min-element has right subtree, next smallest element will be in it
+        # otherwise next smallest element is already next in stack (on top)
         if ( theNext.right is not None ):
             self._push_all_left(theNext.right)
         return(theNext.data)
