@@ -10,6 +10,8 @@
 # 1 2 3     1 4 7      7 4 1
 # 4 5 6  => 2 5 8  =>  8 5 2
 # 7 8 9     3 6 9      9 6 3
+# In order to come to the solution, blindly write down the transpose, then look at how to reach the result - reversing rows becomes obvious.
+
 
 def rotate_image_matrix(matrix: list[list]) -> list[list]:
     n = len(matrix)
