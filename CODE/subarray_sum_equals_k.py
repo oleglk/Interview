@@ -7,7 +7,8 @@
 # import importlib; import subarray_sum_equals_k; importlib.reload(subarray_sum_equals_k); from subarray_sum_equals_k import *
 
 
-# The idea: maintain running sum from index 0 and a hash of all prefix-sums from index 0 mapped to occurence counts. If (current_running_sum - k) exist in the hash, increment the result by number of its occurences.
+# The idea: maintain running prefix-sum FROM INDEX 0 and a hash of all prefix-sums FROM INDEX 0 mapped to occurence counts. If (running_prefix_sum - k) exist in the hash, increment the result by number of its occurences.
+# E.g. subarray_sum = running_prefix_sum - some_prefix_sum_from_hash; if ==k, we found an occurence of continuous subarray summing to k.
 
 from collections import defaultdict
 
@@ -20,7 +21,7 @@ def subarray_sum_equals_k(arr: list[int], k: int) -> int:
         if ( currSum == k ):
             res += 1  # matching subarray from index 0
         if ( (currSum - k) in prefixSums ):
-            # matching subarray(s) exist(s)
+            # matching subarray(s) starting from indices other than 0 exist(s)
             res += prefixSums[currSum - k]
         prefixSums[currSum] += 1
     return res
