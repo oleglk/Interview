@@ -1,4 +1,4 @@
-# rotate_image_matrix.py - Rotate n x n matrix in-place by transpose + reverse rows.
+# rotate_image_matrix.py - Rotate n x n matrix 90 degrees clockwise in-place by transpose + reverse rows.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from rotate_image_matrix import *
@@ -6,6 +6,10 @@
 # RELOAD:
 # import importlib; import rotate_image_matrix; importlib.reload(rotate_image_matrix); from rotate_image_matrix import *
 
+# The illustration - transpose then reverse-rows:
+# 1 2 3     1 4 7      7 4 1
+# 4 5 6  => 2 5 8  =>  8 5 2
+# 7 8 9     3 6 9      9 6 3
 
 def rotate_image_matrix(matrix: list[list]) -> list[list]:
     n = len(matrix)
