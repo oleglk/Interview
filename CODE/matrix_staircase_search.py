@@ -1,4 +1,4 @@
-# matrix_staircase_search.py - Search target in row/col sorted matrix using staircase search.
+# matrix_staircase_search.py - Search target in row-wise and column-wise sorted matrix using staircase search.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from matrix_staircase_search import *
@@ -7,7 +7,35 @@
 # import importlib; import matrix_staircase_search; importlib.reload(matrix_staircase_search); from matrix_staircase_search import *
 
 
-# The idea: Start from top-right corner. If element > taget, eliminate current column by --col, since entire remaining-part-of-column is > target. If element < target, eliminate current row by ++row, since entire remaining-part-of-row is < target. If element = target, return true. If row or column goes out of bounds, element not found.
+# The idea: Start from top-right corner. If element > target, eliminate current column by --col, since entire remaining-part-of-column is > target. If element < target, eliminate current row by ++row, since entire remaining-part-of-row is < target. If element = target, return true. If row or column goes out of bounds, element not found.
+
+# Matrix example:
+# 10, 20, 30, 40
+# 15, 25, 35, 45
+# 27, 29, 37, 48
+# 32, 33, 39, 50
+
+# Look for target=60:
+# r=0, c=3 => element(40) < target => eliminate row#0 =>
+# r=1, c=3 => element(45) < target => eliminate row#1 =>
+# r=2, c=3 => element(48) < target => eliminate row#2 =>
+# r=3, c=3 => element(50) < target => eliminate row#3 =>
+# r=4, c=3 => row went out of bounds - target not found
+# Look for target=29:
+# r=0, c=3 => element(40) > target => eliminate col#3 =>
+# r=0, c=2 => element(30) > target => eliminate col#2 =>
+# r=0, c=1 => element(20) < target => eliminate row#0 =>
+# r=1, c=1 => element(25) < target => eliminate row#1 =>
+# r=2, c=1 => element(29) = target => found
+# Look for target=28:
+# r=0, c=3 => element(40) > target => eliminate col#3 =>
+# r=0, c=2 => element(30) > target => eliminate col#2 =>
+# r=0, c=1 => element(20) < target => eliminate row#0 =>
+# r=1, c=1 => element(25) < target => eliminate row#1 =>
+# r=2, c=1 => element(29) > target => eliminate col#1 =>
+# r=2, c=0 => element(27) < target => eliminate row#2 =>
+# r=3, c=0 => element(32) > target => eliminate col#0 =>
+# r=3, c=-1 col went out of bounds - target not found
 
 
 def matrix_staircase_search(matrix: list[list], target: int) -> bool:
