@@ -1,4 +1,4 @@
-# find_duplicate_number.py - Find duplicate in n+1 numbers without modifying array using Floyd's cycle detection.
+# find_duplicate_number.py - Find duplicate in n+1 numbers without modifying array using Floyd's cycle detection. The values are 1..n so one is duplicated.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from find_duplicate_number import *
@@ -12,6 +12,10 @@
 #          It could be mathematically proven that (forward) distance from the meeting point to the cycle entrance equals distance from start to the cycle entrance.
 # Phase 2: Move 2 pointers at the same speed - one from start, other from phase-1-meeting-point; they must meet at the cycle entrance which is the duplicated element.
 
+# In the walkthroughs, t stays for tortoise (slow) pointer, h - for hair (fast).
+## !! Walkthrough doesn't match the code at init val of phase2 t pointer !!
+## !! Walkthrough sets t=0, code sets ptr1=arr[0]                        !!
+## !! Changing walkthrough breaks it, changing code breaks it            !!
 # ========= Walkthrough_1: ==========
 #  0 1 2 3 4
 # [3 1 3 4 2]
@@ -23,6 +27,7 @@
 # (2)
 # t=0   h=2
 # t=0:3 h=2:3 equal - 3 is duplicated
+
 # ========== Walkthrough_2: ==========
 #  0 1 2 3 4
 # [1 3 4 2 2]
