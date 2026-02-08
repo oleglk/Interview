@@ -12,7 +12,9 @@
 #  foreach marked-as-prime number p from 2 to sqrt(n)
 #    mark as non-prime numbers p*p, p*(p+1), p*(p+2), ... n
 ## Considering primes <= sqrt(n), since a composite number n has at least one factor <= sqrt(n) (mult of 2 numbers > sqrt(n) produce result > n).
-## Starting from p*p, since p*(p-1) and smaller are already processed.
+#### E.g. if a number has no prime factors up to its square root, it is prime.
+## Starting from p*p, since p*(p-1) and smaller are already processed by smaller prime factors.
+#### Any composite number that is smaller than p^2 must have at least one prime factor smaller than p, meaning it has already been crossed off.
 
 
 def count_primes(n: int) -> int:
@@ -22,10 +24,11 @@ def count_primes(n: int) -> int:
     isPrime[0] = False;  isPrime[1] = False
 
     p = 2
-    while ( p*p < n ):
+    while ( p*p < n ):  # e.g. p < sqrt(n); works with "while ( p*p <= n )" too
         if ( not isPrime[p] ):
             p += 1
             continue  # we are only interested in believed-to-be-prime factors
+        # mark MULTIPLES OF p as non-primes
         for i in range(p*p, n, p):  # p*(p+1)==p*p+p; p*(p+2)==p*p+p+p
             isPrime[i] = False
         p += 1
@@ -37,6 +40,9 @@ def test__count_primes():
     for n in [
             3,  #1
             10, #4
+            11, #4
+            12, #5
+            30, #10
             35  #11
             ]:
         print("====================================")
