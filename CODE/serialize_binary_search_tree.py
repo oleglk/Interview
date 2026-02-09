@@ -52,16 +52,24 @@ def deserialize_bst(data: str) -> Optional[Node]:
     def build_bst(minVal: int, maxVal: int) -> Optional[Node]:
         nonlocal values, currIdx
         #print(f"@@ values: {values}, currIdx: {currIdx}")
+        print(f"@@ currIdx={currIdx}, val[currIdx]={values[currIdx] if (currIdx < len(values)) else '---'};  [{minVal}..{maxVal}]")
         if ( (currIdx >= len(values)) or
              (not (minVal <= values[currIdx] <= maxVal)) ):
-            return None  # either finished or value out of bounds
+            # either finished or value out of bounds
+            # it means the subtree is absent - .left or .right will be None
+            # (out-of-bounds subtree belongs to other place in the tree)
+            return None
         currVal = values[currIdx]  # (after idx-bound check!)
         # create current node (we use preorder) and advance index
         currNode = Node(currVal)
         currIdx += 1
         # process children
         currNode.left  = build_bst(minVal, currVal)
+        resStr = "Accept" if (currNode.left is not None) else "Reject"
+        print(f"@@ {resStr} left subtree of {currVal}")
         currNode.right = build_bst(currVal, maxVal)
+        resStr = "Accept" if (currNode.right is not None) else "Reject"
+        print(f"@@ {resStr} right subtree of {currVal}")
         # return root of the ready subtree
         return currNode
 
@@ -100,8 +108,18 @@ def test__serialize_deserialize_bst():
     t3n0.left = t3n1;  t3n0.right = t3n2
     t3n3 = Node(0);    t3n4 = Node(2);     t3n5 = Node(4)
     t3n1.left = t3n3;  t3n1.right = t3n4;  t3n2.left = t3n5
+    ##     5
+    ##    / \
+    ##   3   7
+    ##  /   /
+    ## 2   6
+    t4n0 = Node(5)
+    t4n1 = Node(3);    t4n2 = Node(7)
+    t4n0.left = t4n1;  t4n0.right = t4n2
+    t4n3 = Node(2);    t4n4 = Node(6)
+    t4n1.left = t4n3;  t4n2.left = t4n4
 
-    for root in [t1n0, t2n0, t3n0]:
+    for root in [t1n0, t2n0, t3n0, t4n0]:
         print("===========================")
         byLevels = binary_tree_level_order(root)
         print(f"Tree by levels: {byLevels}")
