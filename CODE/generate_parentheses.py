@@ -8,6 +8,8 @@
 
 
 # The idea: recursion; can add "(" if number of open-s < n/2; can add ")" if number of close-s < number of open-s; the string is complete when its length is n.
+# At any point there cannot be > n/2 openers and there cannot be more closers than openers.
+# See https://algo.monster/liteproblems/22
 
 
 def generate_parentheses(n: int) -> list[str]:
@@ -23,10 +25,10 @@ def generate_parentheses(n: int) -> list[str]:
             res.append("".join(currList))
             return
 
-        if ( nOpen < np ):  # can add opener
+        if ( nOpen < np ):  # can add opener (send NEW list with opener)
             valid_parentheses(currList + ['('], nOpen+1, nClose)
 
-        if ( nClose < nOpen ):  # can add closer
+        if ( nClose < nOpen ):  # can add closer (send NEW list with closer)
             valid_parentheses(currList + [')'], nOpen, nClose+1)
 
         return
