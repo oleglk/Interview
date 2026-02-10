@@ -10,7 +10,7 @@
 
 
 def longest_substring_with_at_most_k_distinct(inpStr: str, k: int) -> int:
-    charToFreq = {}  # maps [a..z] to appearace count
+    charToFreq = {}  # maps [a..z] to appearence count
     maxLength = 0
     cntDistinct = 0
 
@@ -23,7 +23,7 @@ def longest_substring_with_at_most_k_distinct(inpStr: str, k: int) -> int:
         else:
             charToFreq[ch] += 1
 
-        # shrink window from left untill num of distinct chars reduces to k
+        # shrink window from left until num of distinct chars reduces to k
         while ( cntDistinct > k ):
             if ( charToFreq[inpStr[left]] == 1 ):  # guaranteed to be >= 1
                 cntDistinct -= 1
