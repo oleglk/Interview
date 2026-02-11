@@ -12,7 +12,7 @@
 from collections import defaultdict, deque
 
 def courses_schedule_2(numCourses: int, prerequisitePairs: list) -> list:
-    adjacency = defaultdict(list)  # dependency graph as adjacency list
+    adjacency = defaultdict(list)  # dependency graph as dict of adjacency lists
     inDegree = [0]*numCourses
     for a,b in prerequisitePairs:  # b depends on a
         adjacency[a].append(b)
@@ -20,6 +20,7 @@ def courses_schedule_2(numCourses: int, prerequisitePairs: list) -> list:
     # init the queue with courses without dependencies
     queue = deque([c for c in range(0, numCourses) if (inDegree[c] == 0)])
 
+    # perform topological sorting
     order = []  # the resulting order
     while ( queue ):
         u = queue.popleft()  # u is a course with no unresolved dependencies
