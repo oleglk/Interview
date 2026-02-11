@@ -10,7 +10,8 @@
 # The idea (for x^n):
 # - if n is 0, x^n = 1
 # - if n is even, x^n = ( x^(n/2) )^2
-# - if n is odd, x^n = x*( x^((n-1)/2) )^2
+# - if n is odd, x^n = x * x^(n-1) = x * ( x^((n-1)/2) )^2
+# Note: if n is even, n/2==n//2; if n is odd, (n-1)/2==n//2
 
 def binary_exponent(x: float, n: int) -> float:
     """Recursively computes x^n for any x and any integer n"""
