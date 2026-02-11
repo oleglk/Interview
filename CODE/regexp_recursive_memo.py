@@ -1,4 +1,5 @@
-# regexp_recursive_memo.py - Regular Expression Matching ('.' and '*') - recursive with memoization.
+# regexp_recursive_memo.py - Regular Expression Matching ('.' and '*') - recursive with memoization. '.' means any char, '*' means 0 or more occurences of preceding char.
+# See https://medium.com/@msaqib_9803/regular-expression-matching-coding-interview-question-1eb5e3f47fac
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from regexp_recursive_memo import *
@@ -22,13 +23,13 @@ def regexp_recurse(inpStr: str, pattern: str, memo: dict) -> bool:
         firstCharMatches = (len(inpStr) > 0) and ((inpStr[0] == pattern[0]) or (pattern[0] == '.'))
     
         # check for '*'
-        if ( (len(pattern) > 1) and (pattern[1] == '*') ):
+        if ( (len(pattern) > 1) and (pattern[1] == '*') ):  # with '*'
             # either ignore the 1st pattern char or use it - if 1st char matches
             # when 1st pattern char is used, it can match multiple input chars
             resIgnoreFirst = regexp_recurse(inpStr, pattern[2:], memo)
             resUseFirst = firstCharMatches and regexp_recurse(inpStr[1:], pattern, memo)
             result = resIgnoreFirst or resUseFirst
-        else:
+        else:                                                # without '*'
             result = firstCharMatches and regexp_recurse(inpStr[1:], pattern[1:], memo)
     memo[(inpStr, pattern)] = result
     return result
