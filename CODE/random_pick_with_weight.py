@@ -9,6 +9,8 @@
 
 # The idea: build the array of intervals with lengths proportional to weights. Pick random numbers falling into these intervals. Use binary search to find index of the interval being picked - the one where the random number belongs.
 
+# See https://algo.monster/liteproblems/528
+
 
 import random
 
