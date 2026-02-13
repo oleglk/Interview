@@ -7,10 +7,18 @@
 # import importlib; import solve_sudoku; importlib.reload(solve_sudoku); from solve_sudoku import *
 
 
+# Sudoky playfield is a 9x9 matrix.
+# A sudoku solution must satisfy all of the following rules:
+#   - Each of the digits 1-9 must occur exactly once in each row.
+#   - Each of the digits 1-9 must occur exactly once in each column.
+#   - Each of the digits 1-9 must occur exactly once in each of the 9, 3x3 sub-boxes of the grid.
+
 # The idea: in every cell starting from top-left try each number and call recursively. If no luck, clear the number. Mark used numbers in bit-fields for rows, columns and boxes.
 
 
 # helper for boxes' bit-fields (index calc examples: 1//3=0, 4//3=1, 7//3=2)
+## (1,1)=>0, (3,0)=>3, (5,2)=>3, (6,6)=>8, (8,8)=>8
+## (3,3)=>4, (0,3)=>1, (2,5)=>1
 def _box_idx(row, col):
     return row//3 * 3  +  col//3
 
@@ -38,13 +46,14 @@ def clear_number_in_cell(i, j, num, rows, cols, boxes):
     boxes[_box_idx(i, j)] &= bit0
     
 
+# Solves unfinished sudoku starting from row=i, column=j
 def solve_sudoku_rec(mat, i, j, rows, cols, boxes):
     n = len(mat)
     # base case is if the whole matrix is processed
     if ( (i == n-1) and (j == n) ):  # step-column outside the matrix in last row
         return True
 
-    # if stepped beyound last column in non-last raw, go to next row
+    # if stepped beyound last column in non-last row, go to next row
     if ( j == n ):
         i += 1
         j = 0
