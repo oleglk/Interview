@@ -13,6 +13,17 @@
 # - element #n+1 selected with probability 1/(n+1)
 # - any previous element selected with probability 1/n * (1 - 1/(n+1))
 ## 1/n * (1 - 1/(n+1)) == 1/n * n/(n+1) == 1/(n+1) <<<< uniformity proven
+#################################################################################
+# Alternative proof (ChatGPT for "How to solve Uniform Reservoir Sampling software interview problem?"):
+# - ASSUME THAT an element #j is selected when first seen with probability 1/j
+# - Then, to remain being the choice it should not be replace by consequent elements up to n.
+# - Probability of not being replaced by element #i == 1 - 1/i
+## Total probability of element #j being selected and not replaced:
+## p = 1/j * (1 - 1/(j+1)) * (1 - 1/(j+2)) * ... * (1 - 1/n) =
+##   = 1/j * j/(j+1)       * (j+1)/(j+2)   * ... * (n-1)/n   = 1/n
+# E.g. if we select each element #j in stream of size n with probability 1/j, the resulting distribution has probability 1/n which means uniform.
+# Element #0 selected with probability 1, #1 with probability 1/2, and so on.
+#################################################################################
 
 import random
 
