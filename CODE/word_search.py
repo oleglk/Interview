@@ -7,6 +7,9 @@
 # import importlib; import word_search; importlib.reload(word_search); from word_search import *
 
 
+# The idea: run dfs from all cells in the grid.
+#  See https://www.hellointerview.com/learn/code/backtracking/word-search .
+
 def word_search(board: list[list], word: str) -> bool:
     rows = len(board);
     if ( rows == 0 ):  return False
@@ -15,6 +18,7 @@ def word_search(board: list[list], word: str) -> bool:
     visited = set()
 
     def dfs(r, c, idx):
+        # 'idx' is currently searched for index within the word
         if ( idx == len(word) ):
             return True  # found the whole word on the previous step
         # check if cell valid, and if yes, whether char unvisited and matches
@@ -24,11 +28,11 @@ def word_search(board: list[list], word: str) -> bool:
             return False
         # char matches and word unfinished; explore all 4 directions
         #print(f"@@ Explore for '{word}' at {r}, {c}, {idx}")
-        visited.add((r,c))
+        visited.add((r,c))  # prevent reuse of the cell in the current path
         found = (dfs(r-1, c, idx+1) or dfs(r+1, c, idx+1) or
                  dfs(r, c-1, idx+1) or dfs(r, c+1, idx+1))
         #if ( found ):  print(f"@@ Found for '{word}' at {r}, {c}, {idx}")
-        visited.remove((r,c))
+        visited.remove((r,c)) # free up the cell for use by other path
         return found
 
     for r in range(0, rows):
