@@ -12,7 +12,7 @@
 from collections import defaultdict
 
 class Solution:
-    def __init__(self, n: int, edges: list[int]):
+    def __init__(self, n: int, edges: list):
         self.numNodes = n
         self.parent = list(range(0, n)) # initially each node is parent of itself
         self.edges = edges
@@ -38,7 +38,7 @@ class Solution:
 
 
     def count(self) -> int:
-        compDict = defaultdict(list)
+        compDict = defaultdict(list)  # for {parent :: list-of-nodes}
         for node, par  in enumerate(self.parent):
             #compDict[par].append(node)  # assuming all paths compressed
             compDict[self.find_parent(par)].append(node)
