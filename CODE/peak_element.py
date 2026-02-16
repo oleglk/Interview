@@ -9,8 +9,10 @@
 
 # The idea:
 # Can use binary earch, since:
-# - If an element is smaller than it's next element then it is guaranteed that at least one peak element will exist on the right side of this element.
-# - Conversely if an element is smaller than it's previous element then it is guaranteed that at least one peak element will exist on the left side of this element.
+# - If an element is smaller than its next element then it is guaranteed that at least one peak element will exist on the right side of this element.
+# - Conversely if an element is smaller than its previous element then it is guaranteed that at least one peak element will exist on the left side of this element.
+
+# See https://www.geeksforgeeks.org/dsa/find-a-peak-in-a-given-array/ .
 
 
 def peak_element(arr: list) -> int:
@@ -22,6 +24,8 @@ def peak_element(arr: list) -> int:
         return 0
     if ( arr[n-1] > arr[n-2] ):
         return n-1
+    # now, since no two adjacent elements are same:
+    #      arr[0] < arr[1]  and  arr[n-1] < arr[n-2]
 
     # binary search
     lo = 1
@@ -33,7 +37,8 @@ def peak_element(arr: list) -> int:
         if ( arr[mid] < arr[mid+1] ): # a peak must exist on the right
             lo = mid + 1
         else:                         # a peak must exist on the left
-            hi = mid  # !!! GFG uses hi=mid-1
+            hi = mid  # !!! GFG uses hi=mid-1, which works as well
+    # should not be reached; may raise exception here
 
 
 def test__peak_element():
