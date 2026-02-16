@@ -8,6 +8,7 @@
 
 
 # The idea: use binary search.
+# The smallest element begins the break. One half contains the break, the other half is sorted.
 # a) If arr[mid] > arr[high] //5 6 7 8 1 2 3 4//, left half is sorted - continue searching in the right part => low = mid + 1.
 # b) If arr[mid] <= arr[high] //8 1 2 3 4 5 6 7//6 7 8 1 2 3 4 5//, right part is sorted - continue searching in the left part => high = mid.
 # Termination condition: if low < high, the current subarray is sorted, and low is the minimum.
