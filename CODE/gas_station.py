@@ -1,4 +1,5 @@
 # gas_station.py - Given two arrays gas[] and cost[], each gas station i provides gas[i] fuel, and it takes cost[i] fuel to travel to the next station. Starting with an empty tank, find the index of the gas station from which you can complete a full circular tour. If it’s not possible, return -1.
+# Assume cost[n-1] is what it takes to travel to station #0 (circularity).
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from gas_station import *
@@ -10,6 +11,8 @@
 # The idea: start with empty tank at station 0. For each "hop" compute tank+gas-cost; if falls below zero upon reaching station #i, reset start to #i+1.
 # The rationale of resetting to #i+1: if we cannot complete the tour with some remaining fuel when starting from stations [old-start, i], we cannot do it without remaining fuel either.
 # The solution effectively "drops" all start options where tour is impossible.
+
+# See https://www.jointaro.com/interviews/questions/gas-station/ .
 
 def gas_station(gas: list[int], cost: list[int]) -> int:
     if ( sum(gas) < sum(cost) ):
@@ -24,8 +27,12 @@ def gas_station(gas: list[int], cost: list[int]) -> int:
         if ( remaining < 0 ):
             # reset starting point to the next station,
             # since cannot start at any of [startIdx, i] (see the "rationale")
+            if ( i == n-1 ):
+                return -1  # tour impossible; we already tried starting from #0
             remaining = 0
             startIdx = i + 1
+            ## we already checked starting from #0 with empty tank,
+            ## so sure can continue from #n-1 to #0 with no less fuel
     return startIdx
 
 
