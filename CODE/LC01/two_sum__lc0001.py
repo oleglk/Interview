@@ -20,6 +20,7 @@ def two_sum(arr: list[int], target: int) -> list[int]:
         complements[target - num1] = i
     print(f"@@ complements={complements}")
     # look for pair of _distinct_ indices where elements sum to 'target'
+    # if duplicated, 'complements' has last occurence, 2nd pass picks the 1st
     for  i, num2  in enumerate(arr):
         if ( (num2 in complements) and (i != complements[num2]) ):
             return (i, complements[num2])  # found
