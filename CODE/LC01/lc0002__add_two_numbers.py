@@ -3,10 +3,10 @@
 # You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
 # LOAD:
-# import sys;  import os;  sys.path.insert(0, os.getcwd());  from add_two_numbers__lc0002 import *
+# import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0002__add_two_numbers import *
 
 # RELOAD:
-# import importlib; import add_two_numbers__lc0002; importlib.reload(add_two_numbers__lc0002); from add_two_numbers__lc0002 import *
+# import importlib; import lc0002__add_two_numbers; importlib.reload(lc0002__add_two_numbers); from lc0002__add_two_numbers import *
 
 # The idea: traverse the 2 lists, add elemments while taking care of carry.
 

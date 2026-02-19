@@ -4,10 +4,10 @@
 # You can return the answer in any order.
 
 # LOAD:
-# import sys;  import os;  sys.path.insert(0, os.getcwd());  from two_sum__lc0001 import *
+# import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0001__two_sum import *
 
 # RELOAD:
-# import importlib; import two_sum__lc0001; importlib.reload(two_sum__lc0001); from two_sum__lc0001 import *
+# import importlib; import lc0001__two_sum; importlib.reload(lc0001__two_sum); from lc0001__two_sum import *
 
 
 # The idea: two passes over the array: 1st pass builds hash of complements {target-arr[i] :: i }, 2nd pass looks up matching complement.
