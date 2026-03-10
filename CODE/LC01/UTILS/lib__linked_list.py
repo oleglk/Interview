@@ -98,6 +98,16 @@ class LinkedList:
         continued = " ..." if (cnt >= maxCnt) else ""
         print(f'{" -> ".join(map(str, elements))}{continued}')
 
+    @staticmethod
+    def list_to_string(head: Node):
+        s = ""
+        while ( head is not None ):
+            s += str(head.data)
+            s += " -> "
+            head = head.next
+        return s
+
+
 # Example Usage
 def example_usage():
     my_list = LinkedList()
