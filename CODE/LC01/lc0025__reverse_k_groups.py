@@ -27,8 +27,23 @@
 
 from UTILS.lib__linked_list import *
 
+# The main function
+def reverse_k_groups(head: Node, k: int) -> Node:
+    if ( (head is None) or (head.next is None) ):
+         return head
+    groupFirst, groupLast = _find_groups(head, k)
+    # for p in groupFirst:  print(p.data, ">")
+    # for p in groupLast:  print(p.data if p is not None else "None", ">")
+    groupFirstR, groupLastR = _reverse_in_groups(groupFirst, groupLast)
+    # for p in groupFirstR:  print(p.data if p is not None else "None", ">")
+    # for p in groupLastR:  print(p.data if p is not None else "None", ">")
+    newHead = _reconnect_groups(groupFirstR, groupLastR)
+    # print(LinkedList.list_to_string(newHead))
+    return newHead
+##
 
-def reverse_linked_list(head: Node) -> Node:
+
+def _reverse_linked_list(head: Node) -> Node:
     if ( (head is None) or (head.next is None) ):
         return(head)
     prev = None
@@ -41,11 +56,12 @@ def reverse_linked_list(head: Node) -> Node:
         prev = curr
         curr = next
     return(prev)
+##
 
 
 # Returns tuple of arrays groupFirst, groupLast
 # Assumes list is not empty
-def find_groups(listHead: Node, k:int) -> tuple[list[Node], list[Node]]:
+def _find_groups(listHead: Node, k:int) -> tuple[list[Node], list[Node]]:
 #  0 1 2 3 4 5 6 7
 #  +     +     +    - groupFirst
 # >1>2>3>4>5>6>7>8>0, k=3
@@ -65,17 +81,18 @@ def find_groups(listHead: Node, k:int) -> tuple[list[Node], list[Node]]:
         p = p.next
         i += 1
     return (groupFirst, groupLast)
+##
 
 
 # Marks group ends with None-s, reverses each group, swaps first-last
-def reverse_in_groups(groupFirst: list[Node], groupLast: list[Node]) -> tuple[list[Node], list[Node]]:
+def _reverse_in_groups(groupFirst: list[Node], groupLast: list[Node]) -> tuple[list[Node], list[Node]]:
     if ( len(groupFirst) != len(groupLast) ):
         raise Exception("Different lengths of group first/last pointers")
     for i in range(0, len(groupFirst)):
         if ( groupLast[i] is None ):
             continue  # skip incomplete (the last) group
         groupLast[i].next = None  # terminate the group for reversal
-        newHead = reverse_linked_list(groupFirst[i])
+        newHead = _reverse_linked_list(groupFirst[i])
         if ( newHead != groupLast[i] ):
             raise Exception("newHead != groupLast[i]")
         # swap groupFirst[i] and groupLast[i]
@@ -83,26 +100,45 @@ def reverse_in_groups(groupFirst: list[Node], groupLast: list[Node]) -> tuple[li
         groupFirst[i] = groupLast[i]
         groupLast[i] = tmp
     return (groupFirst, groupLast)
+##
 
 
 # Connects end of each group to start of next group.
 # Returns pointer to the head.
-def reconnect_groups(groupFirst: list[Node], groupLast: list[Node]) -> Node:
+def _reconnect_groups(groupFirst: list[Node], groupLast: list[Node]) -> Node:
     for i in range(0, len(groupLast)-1):
         if ( groupLast[i] is not None  ): # any group but the last-incomplete
             groupLast[i].next = groupFirst[i+1]
     return groupFirst[0]
+##
 
+
+def test__reverse_k_groups():
+    tasks = [
+        [[1,2,3,4,5,6,7,8], 3],       # [3,2,1,6,5,4,7,8]
+        [[1,2,3,4,5,6], 3],           # [3,2,1,6,5,4]
+        [[], 2],                      # []
+        [[1], 2],                     # [1]
+        [[1,2,3], 3]                  # [3,2,1]
+    ]
+    for pyList, k  in tasks:
+        print("=================================")
+        linkedList = LinkedList.from_python_list(pyList)
+        print(f"Input: {LinkedList.list_to_string(linkedList.head)}, k={k}")
+        newHead = reverse_k_groups(linkedList.head, k)
+        print(f"Result: {LinkedList.list_to_string(newHead)}")
+##
+    
 
 # l1 = LinkedList.from_python_list([1,2,3,4,5,6,7,8])
 #
-# groupFirst, groupLast = find_groups(l1.head, 3)
+# groupFirst, groupLast = _find_groups(l1.head, 3)
 # for p in groupFirst:  print(p.data, ">")
 # for p in groupLast:  print(p.data if p is not None else "None", ">")
 #
-# groupFirstR, groupLastR = reverse_in_groups(groupFirst, groupLast)
+# groupFirstR, groupLastR = _reverse_in_groups(groupFirst, groupLast)
 # for p in groupFirstR:  print(p.data if p is not None else "None", ">")
 # for p in groupLastR:  print(p.data if p is not None else "None", ">")
 #
-# newHead = reconnect_groups(groupFirstR, groupLastR)
+# newHead = _reconnect_groups(groupFirstR, groupLastR)
 # print(LinkedList.list_to_string(newHead))
