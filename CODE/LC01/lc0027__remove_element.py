@@ -11,12 +11,12 @@
 
 def remove_element(arr: list[int], val: int) -> list[int]:
     if ( arr is None ):  return (None, 0)
-    nextUniqInsert = 0
+    nextNonValInsert = 0
     for elem in arr:
         if ( elem != val ):
-            arr[nextUniqInsert] = elem
-            nextUniqInsert += 1
-    return (arr, nextUniqInsert)
+            arr[nextNonValInsert] = elem
+            nextNonValInsert += 1
+    return (arr, nextNonValInsert)
 ##
 
 
