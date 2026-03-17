@@ -18,3 +18,52 @@
 # 3) Swap nums[i] and nums[j].
 # (All positions to the right of #i still form descending suffix, ?)
 # 4) Reverse order of i+1...end to convert descending suffix into ascending suffix. 
+# See https://algo.monster/liteproblems/31
+
+def next_permutation(nums: list[int]) -> list[int]:
+    if ( (nums is None) or (len(nums) == 1) ):
+        return nums
+    # Find the rightmost element that's smaller than successor -> nums[iPivot]
+    iPivot = -1
+    for i in range(len(nums)-2, -1, -1):
+        if ( nums[i] < nums[i+1] ):
+            iPivot = i
+            break
+    # if pivot not found (iPivot == -1), we have the largest permutation
+    # positions to the right of #iPivot form descending suffix
+
+    if ( iPivot >= 0 ):  # not the largest permutation
+        # Find the element to swap pivot with (must exist)
+        #   - the smallest element that's larger than nums[iPivot]
+        #   Since suffix right of iPivot is descending,
+        #   it's rightmost element that is larger than nums[iPivot]
+        for i in range(len(nums)-1, iPivot, -1):
+            if ( nums[i] > nums[iPivot] ):
+                iSwap = i
+                break
+        # swap #iPivot with #iSwap
+        tmp = nums[iSwap];  nums[iSwap] = nums[iPivot];  nums[iPivot] = tmp
+
+    # reverse the order after iPivot to get the NEXT larger permutation
+    # - it turns descending suffix into ascending
+    # - (if iPivot == -1), it turns largest permutation into smallest
+    nums[iPivot+1:] = nums[iPivot+1:][::-1]
+
+    return nums
+##
+
+
+def test__next_permutation():
+    tasks = [
+        [1,2,3,4,5],        # [1,2,3,5,4]
+        [5,4,3],            # [3,4,5]
+        [1,2,3,5,4],        # [1,2,4,3,5]
+        [2,3,1],            # [3,1,2]
+        [1,1,5],            # [1,5,1]
+    ]
+    for nums in tasks:
+        print("======================================")
+        print(f"Input: {nums}")
+        res = next_permutation(nums)
+        print(f"Result: {res}")
+##
