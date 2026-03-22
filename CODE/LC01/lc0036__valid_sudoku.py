@@ -18,7 +18,7 @@
 ## 0,3 -> 0*3 + 1 -> 1
 ## 2,3 -> 0*3 + 1 -> 1
 ## 3,2 -> 1*3 + 0 -> 3
-
+# See: https://algo.monster/liteproblems/36
 
 def box_index(row, col):
     return (row // 3) * 3 + (col // 3)
