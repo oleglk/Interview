@@ -14,8 +14,8 @@ def combination_sum_1_recurse(arr: list[int], currIdx: int, currCombo: list[int]
                               res: list[list[int]], remains: int) -> None:
     # base case 1: valid combo found
     if ( remains == 0 ):
-        res.append(currCombo)
-        print(f"@@ Appended ({currCombo}) to obtain ({res})")
+        res.append(list(currCombo)) # list constructor forces copy of 'currCombo'
+        #print(f"@@ Appended ({currCombo}) to obtain ({res})")
         return
     # base case 2: index out of range
     if ( currIdx >= len(arr) ):
@@ -25,7 +25,7 @@ def combination_sum_1_recurse(arr: list[int], currIdx: int, currCombo: list[int]
         return
 
     # try option of using current element
-    # 'curIdx' not incremented to allow using current element again
+    # 'currIdx' not incremented to allow using current element again
     currCombo.append(arr[currIdx])
     combination_sum_1_recurse(arr, currIdx, currCombo, res,
                               remains - arr[currIdx])
