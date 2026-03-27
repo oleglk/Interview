@@ -14,7 +14,17 @@
 # - result of #i * #j affects 2 positions: units added to (i+j), carry-over added to #(i+j+1)
 # See https://medium.com/@bryanchen1105/beyond-int-how-to-conquer-the-multiply-strings-interview-classic-fd339ba9d009
 
+     #   123
+     #  *
+     #   456
+     #   ---
+     #   738
+     #  615
+     # 492
+     # =====
+     # 56088
 
+       
 def multiply_strings(s1: str, s2: str) -> str:
     # reverse both input strings
     s1 = s1[::-1];  s2 = s2[::-1]
