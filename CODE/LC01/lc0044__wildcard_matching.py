@@ -10,6 +10,8 @@
 # RELOAD:
 # import importlib; import lc0044__wildcard_matching; importlib.reload(lc0044__wildcard_matching); from lc0044__wildcard_matching import *
 
+# See: https://algo.monster/liteproblems/44
+
 
 def wildcard_recursive(inpStr: str, pattern: str) -> bool:
     memo = {}
