@@ -22,20 +22,27 @@ def wildcard_recurse(s: str, sIdx: int, p: str, pIdx: int, memo: dict) -> bool:
         return memo[(sIdx, pIdx)]
     lenS = len(s);  lenP = len(p)
 
-    # base case is when pattern exhausted
-    if ( pIdx == lenP ):
-        result = (sIdx == lenS)  # match if string exhausted too
-    else:  # pattern not exhausted
-        firstCharMatches = (sIdx < lenS) and ((s[sIdx] == p[pIdx]) or (p[pIdx] == '?'))
+    # base case 1: string exhausted;
+    # check if pattern exhausted or has only *-s left
+    if ( sIdx >= lenS ):
+        result = (pIdx >= lenP) or ((p[pIdx] == '*') and wildcard_recurse(s, sIdx, p, pIdx+1, memo))
 
-        # check for '*'
-        if ( (pIdx < lenP-1) and (p[pIdx+1] == '*') ):  # '*'
-            # "use" and "skip" pertain to pattern
-            resUseFirst = firstCharMatches and wildcard_recurse(s, sIdx+1, p, pIdx, memo)
-            resSkipFirst = wildcard_recurse(s, sIdx, p, pIdx+2, memo)
-            result = resUseFirst or resSkipFirst
-        else:                                           # no '*'
-            result = firstCharMatches and wildcard_recurse(s, sIdx+1, p, pIdx+1, memo)
+    elif ( pIdx >= lenP ):
+        # base case 2: pattern exhausted but string - not
+        result = False
+                                    
+    else:  # neither string nor pattern exhausted
+        if ( p[pIdx] == '*' ):
+            resMatchOne  = wildcard_recurse(s, sIdx+1, p, pIdx+1, memo)
+            resMatchMany = wildcard_recurse(s, sIdx+1, p, pIdx,   memo)
+            resMatchNone = wildcard_recurse(s, sIdx,   p, pIdx+1, memo)
+            result = resMatchOne or resMatchMany or resMatchNone
+        elif ( (s[sIdx] == p[pIdx]) or (p[pIdx] == '?') ):
+            # exact match or '?' in pattern; continue from next positions
+            result = wildcard_recurse(s, sIdx+1, p, pIdx+1, memo)
+        else:
+            # mismatch in the current position
+            result = False
 
     memo[(sIdx, pIdx)] = result
     return result
@@ -46,12 +53,12 @@ def test__wildcard_recursive():
     tasks = [
         ["aa", "a"],    # False
         ["aa", "a*"],   # True
-        ["ab", ".*"],   # True
+        ["ab", "?*"],   # True
         ["abc", "abc"], # True
         ["abc", "abd"], # False
         ["obc", "abc"], # False
         ["aa", "*"],    # True
-        ["cb", ".a"],   # False
+        ["cb", "?a"],   # False
     ]
     for inpStr, pattern in tasks:
         print("================================")
