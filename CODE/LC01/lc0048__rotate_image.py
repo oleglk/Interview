@@ -48,6 +48,7 @@ def matrix_transpose(arr: list[list[int]]) -> None:
 def matrix_totate_90(arr: list[list[int]]) -> None:
     if ( arr is None ):
         return
+    # it's crucial to do first flip-rows, then transpose
     matrix_horizontal_flip(arr)
     matrix_transpose(arr)
     return
