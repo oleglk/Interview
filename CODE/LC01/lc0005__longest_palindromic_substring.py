@@ -35,6 +35,7 @@ def expand(s: str, l: int, r: int) -> str:
         l -= 1
         r += 1
     # previous substring could have been palindromic
+    # (check-for-palindrome needed at least when starting from two unequal chars)
     return s[l+1:r]  if (s[l+1] == s[r-1])  else  ""
 
 
