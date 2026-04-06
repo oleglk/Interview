@@ -8,7 +8,7 @@
 # import importlib; import lc0004__median_of_2_arrays; importlib.reload(lc0004__median_of_2_arrays); from lc0004__median_of_2_arrays import *
 
 # The idea (INEFFICIENT): traverse the 2 arrays simultaneously until the needed index is reached.
-# if n1+n2 is odd, targetIndex1 = targetIndex2 = (n1+n2) // 2
+# if n1+n2 is odd, targetIndex1 = targetIndex2 = (n1+n2) // 2 - 1
 # if n1+n2 is even, targetIndex1 = (n1+n2) // 2, targetIndex2 = targetIndex1 + 1
 
 def median_of_2_arrays(nums1: list[int], nums2: list[int]) -> float:
@@ -21,8 +21,9 @@ def median_of_2_arrays(nums1: list[int], nums2: list[int]) -> float:
         return(nums1[0] if (n1 > 0) else nums2[0])
 
     # median == (*targetIndex1 + *targetIndex2) / 2
-    targetIndex1 = (n1+n2) // 2  # index of 1st median
-    # targetIndex2 = targetIndex1 if ((n1+n2) % 2 != 0) else targetIndex1 + 1
+    # odd: 3//2=1;  even: 4//2-1=1
+    targetIndex1 = n//2 if (n % 2 != 0) else n//2 - 1  # index of 1st median
+    # targetIndex2 = targetIndex1 if (n % 2 != 0) else targetIndex1 + 1
 
     # browse the arrays counting to 'targetIndex1', then take one next element
     i = i1 = i2 = -1
@@ -52,7 +53,7 @@ def pick_next(arr1, arr2, i1, i2):
 
     arr1Ends = (i1+1) >= n1;    arr2Ends = (i2+1) >= n2
     if ( (not arr1Ends) and (not arr2Ends) ):  # choose min from 2 arrays
-        if ( arr1[i1+1] <= arr2[i1+2] ):
+        if ( arr1[i1+1] <= arr2[i2+1] ):
             i1 += 1
             nextElem = arr1[i1]
         else:
