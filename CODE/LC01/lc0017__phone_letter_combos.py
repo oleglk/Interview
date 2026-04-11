@@ -33,8 +33,8 @@ def phone_number_letter_combos(numArr: list[int]) -> list[str]:
             continue
         # schedule prefixes with letters for the current digit
         currDigit = numArr[len(prefix)]
-        if currDigit not in digitToLetters:
-            continue  # skip 0,1
+        # (WRONG-AND-NOT-NEEDED) if currDigit not in digitToLetters:
+        # (WRONG-AND-NOT-NEEDED)     continue  # skip 0,1
         for letter in digitToLetters[currDigit]:
             newPrefix = prefix + letter
             prefixQueue.append(newPrefix)
