@@ -26,11 +26,11 @@ def four_sum(nums: list[int], target: int) -> list[list[int]]:
     for i in range(0, n-3):
         if ( (i > 0) and (nums[i] == nums[i-1]) ):
             #print(f"@@ -skip duplicated i={i}: nums[i]={nums[i]}")
-            continue  # skip duplicate at 1st index
+            continue  # skip duplicate at 1st index - all combos with it done
         for j in range(i+1, n-2):
             if ( (j > (i+1)) and (nums[j] == nums[j-1]) ):
                 #print(f"@@ -skip duplicated j={j}: nums[j]={nums[j]}")
-                continue  # skip duplicate at 2nd index
+                continue  # skip duplicate at 2nd index - all combos with it done
             # traverse 2 rightmost indices starting from remaining range inwards
             k = j + 1
             l = n - 1
