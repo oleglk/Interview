@@ -23,9 +23,9 @@ def swap_nodes_in_pairs(head: Node) -> Node:
         # swap p1 and p2
         p1.next = p2.next
         p2.next = p1
-        currPtr.next = p2  # point before the next pair to be swapped
+        currPtr.next = p2  # element that pointed to p1 must now point to p2
         # move pointer-at-next-pair forward 2 elements
-        currPtr = p1
+        currPtr = p1  # p1 now points at the 1st element in the next pair to swap
     return dummy.next
 ##
 
