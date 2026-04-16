@@ -21,6 +21,7 @@ def remove_duplicates_from_sorted_array(arr: list[int]) -> tuple[list[int], int]
     nextUniqInsert = 1
     for i in range(1, len(arr)):
         if ( arr[i] != arr[i-1] ):  # arr[i] is the next unique element
+            # at this moment #nextUniqInsert contains either #i or some duplicate
             arr[nextUniqInsert] = arr[i]
             nextUniqInsert += 1
     return (arr, nextUniqInsert)
