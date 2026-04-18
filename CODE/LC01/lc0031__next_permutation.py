@@ -13,10 +13,12 @@
 ## 1247653 ->(1257643)-> 1253467
 ## 1237654 ->(1247653)-> 1243567
 # The idea:
-# 1) Find the rightmost digit that's smaller than successor -> nums[i]; all positions to the right of #i form descending suffix. If no such position, i=-1 and whole sequence is descending.
-# 2) Find the rightmost digit that's larger than nums[i] -> nums[j]
+# 1) Find the rightmost number that's smaller than successor -> nums[i]; all positions to the right of #i form descending suffix. If no such position, i=-1 and whole sequence is descending.
+# 2) Find the rightmost number that's larger than nums[i] -> nums[j]; it's the smallest number that's still larger than nums[i] (since in descending suffix)
 # 3) Swap nums[i] and nums[j].
-# (All positions to the right of #i still form descending suffix, ?)
+# (All positions to the right of #i still form descending suffix:
+#     - new #j is smaller than #j-1 since before swap #i was smaller than #j
+#     - new #j is larger than #j+1 since before swap #j+1 was smaller than #i)
 # 4) Reverse order of i+1...end to convert descending suffix into ascending suffix. 
 # See https://algo.monster/liteproblems/31
 
@@ -34,7 +36,7 @@ def next_permutation(nums: list[int]) -> list[int]:
 
     if ( iPivot >= 0 ):  # not the largest permutation
         # Find the element to swap pivot with (must exist)
-        #   - the smallest element that's larger than nums[iPivot]
+        #   - smallest element right of iPivot that's larger than nums[iPivot]
         #   Since suffix right of iPivot is descending,
         #   it's rightmost element that is larger than nums[iPivot]
         for i in range(len(nums)-1, iPivot, -1):
