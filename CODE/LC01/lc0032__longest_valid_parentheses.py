@@ -1,5 +1,5 @@
 # lc0032__longest_valid_parentheses.py
-# Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses.
+# Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses. The substring may not start from index 0.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0032__longest_valid_parentheses import *
@@ -56,10 +56,10 @@ def longest_valid_parentheses(s: str) -> int:
         if ( c == '(' ):
             stack.append(i)
         else:  # c == ')'
-            stack.pop()
-            if ( len(stack) == 0 ):  # unmatched closing - reset expression
-                stack.append(i)
-            else:                    # valid substring
+            stack.pop()  # if ) matched, we popped idx of (, otherwise last base
+            if ( len(stack) == 0 ):  # unmatched ) - reset by pushing new base
+                stack.append(i)  # next valid substring, if any, starts after it
+            else:                    # last closing matched - valid substring
                 l = i - stack[-1]
                 maxLength = max(maxLength, l)
     return maxLength
