@@ -8,7 +8,8 @@
 
 # The idea: in loop extract last digit by division (% AND //), append the last digit to the result:
 # (lastDigit = inpInt % 10,  inpInt //= 10,  outInt = outInt * 10 + lastDigit)
-# Do check for overflow before incrementing outInt.
+# Do check for overflow before incrementing outInt:
+#  : outInt * 10 + lastDigit <= maxVal  -->  outInt <= (maxVal - lastDigit) / 10
 
 
 def reverse_integer(inpInt: int) -> int:
