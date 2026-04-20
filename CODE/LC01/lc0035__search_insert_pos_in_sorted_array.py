@@ -8,6 +8,7 @@
 # import importlib; import lc0035__search_insert_pos_in_sorted_array; importlib.reload(lc0035__search_insert_pos_in_sorted_array); from lc0035__search_insert_pos_in_sorted_array import *
 
 # The idea: run regular binary search. At the end, if element not found, left index stays at the insertion position, since it points at the first element no smaller than target.
+# (Since using left pointer as the answer is not 100% clear, can run searches from left pointer - they should be short.)
 
 
 def search_insert_pos_in_sorted_array(arr: list[int], target: int) -> int:
