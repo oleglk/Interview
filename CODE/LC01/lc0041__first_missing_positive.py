@@ -20,10 +20,11 @@ def first_missing_positive(nums: list[int]) -> int:
     # mark presense of x=nums[i]
     for i in range(0, n):
         # we want position #x-1 to hold x
-        # swap until all affected positions are served
+        # swap until POSITION #I has either correct or out-of-range element
+        # (each individual swap puts NUMBER FROM #I into ITS correct position)
         while ( (nums[i] >= 1) and (nums[i] <= n) and
-                (nums[nums[i]-1] != nums[i]) ):
-            # swap #i with #(x-1)
+                (nums[nums[i]-1] != nums[i]) ):  # while nums[x-1] != x
+            # swap #i (holding x) with #(x-1) moves x into #(x-1)
             targetIdx = nums[i] - 1
             nums[i], nums[targetIdx] = nums[targetIdx], nums[i]
 
