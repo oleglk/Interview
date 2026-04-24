@@ -24,6 +24,15 @@
      # =====
      # 56088
 
+     # i goes over 654, j goes over 321
+     # i=0, j=0, resArr=000000:     #   tmp = 0 + 6*3 = 18 => resArr=810000
+     # i=0, j=1, resArr=810000:     #   tmp = 1 + 6*2 = 13 => resArr=831000
+     # i=0, j=2, resArr=831000:     #   tmp = 1 + 6*1 = 7  => resArr=837000
+     # i=1, j=0, resArr=837000:     #   tmp = 3 + 5*3 = 18 => resArr=888000
+     # i=1, j=1, resArr=888000:     #   tmp = 8 + 5*2 = 18 => resArr=888100
+     # i=1, j=2, resArr=888100:     #   tmp = 1 + 5*1 = 6  => resArr=888600
+     # i=2, j=0, resArr=888600:     #   tmp = 8 + 4*3 = 20 => resArr=880800
+     # i=2, j=1, resArr=880800:     #   tmp = 8 + 4*2 = 16 => resArr=880610
        
 def multiply_strings(s1: str, s2: str) -> str:
     # reverse both input strings
