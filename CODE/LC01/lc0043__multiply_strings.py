@@ -11,7 +11,8 @@
 # The idea:
 # - maxlength of resulting string is n1+n2
 # - following school "column" multiplication procedure where indices i and j grow from right to left - e.g. consider strings reversed
-# - result of #i * #j affects 2 positions: units added to (i+j), carry-over added to #(i+j+1)
+# - result of #i * #j affects 2 positions: units added to #(i+j), carry-over added to #(i+j+1)
+#  -- units-to-#(i+j) is easy to verify, carry goes to next position which is #(i+j+1)
 # See https://medium.com/@bryanchen1105/beyond-int-how-to-conquer-the-multiply-strings-interview-classic-fd339ba9d009
 
      #   123
