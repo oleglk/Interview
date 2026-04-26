@@ -31,8 +31,9 @@ def min_jumps_2_recurse(arr: list[int], i: int, memo: list[int]) -> int:
         return memo[i]
 
     res = _BIG_NUM
-    for j in range(i+1, min((i+arr[i]+1), len(arr))):
+    for j in range(i+1, min((i+arr[i]+1), len(arr))):  # j <= i+arr[i]
         val = min_jumps_2_recurse(arr, j, memo)
+        # 'j' - position index, 'val' - num of jumps
         if ( val != _BIG_NUM ):  # end reachable from #j
             res = min(res, 1+val)  # 1 to reach #j, val to reach end from #j
 
