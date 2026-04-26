@@ -21,19 +21,20 @@ def permute(arr: list[int]) -> list[list[int]]:
 ##
 
 
-def permute_recurse(arr: list[int], pos: int, used: list[int], currPermutation: list[int], result: list[list[int]]):
+def permute_recurse(arr: list[int], pos: int, used: list[bool], currPermutation: list[int], result: list[list[int]]):
     n = len(arr)
     if ( pos >= n ):  # finished current permutation
         result.append(currPermutation[:]) # append shallow copy of 'currPermutation'
 
     # if #j unused, put it into #pos and fill remaining positions recursively
     for j, val in enumerate(arr):
+        # this for() loop tries all unused numbers in position #pos
         if ( not used[j] ):
             used[j] = True
             currPermutation[pos] = val
-            # fill positions to the right of #pos
+            # recursively fill positions to the right of #pos
             permute_recurse(arr, pos+1, used, currPermutation, result)
-            used[j] = False  # make#j available for next permutation
+            used[j] = False  # make #j available for next permutation
     return
 ##
 
