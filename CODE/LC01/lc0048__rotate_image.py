@@ -45,7 +45,7 @@ def matrix_transpose(arr: list[list[int]]) -> None:
 ##
 
 
-def matrix_totate_90(arr: list[list[int]]) -> None:
+def matrix_rotate_90(arr: list[list[int]]) -> None:
     if ( arr is None ):
         return
     # it's crucial to do first flip-rows, then transpose
@@ -63,6 +63,6 @@ def test__matrix_totate_90():
     for arr in tasks:
         print("==================================")
         print(f"Input: {arr}")
-        matrix_totate_90(arr)
+        matrix_rotate_90(arr)
         print(f"Result: {arr}")
 ##
