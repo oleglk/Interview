@@ -20,9 +20,9 @@ class NQueensStatus:
         self.board = [["."]*n for col in range(0, n)]
         self.usedColumns = [0]*n
         # ??? Unclear why the origin uses 2*n diagonal positions
-        # ??? Using 2*n-1 causes 'list index out of range' error
+        # ??? Using 2*n-1 for anti-diag causes 'list index out of range' error
         # diagonal indices == [0 + 0  ...   (n-1) + (n-1)] -> 2n-1 positions
-        self.usedDiagonals = [0]*(2*n)
+        self.usedDiagonals = [0]*(2*n-1)
         # anti-diagonal indices = [n - (n-1) + 0  ...  n - 0 + n-1] == [1...2n-1] -> 2n-1 positions
         self.usedAntiDiagonals = [0]*(2*n)
 
@@ -60,6 +60,7 @@ class NQueens:
 
         # try placing queen in all columns of 'row'
         for col in range(0, self.n):
+            print(f"@@ row={row}, col={col} -> row+col={row+col}, n-row+col={self.n-row+col}")
             if ( self.status.cell_is_safe(row, col) ):
                 self.status.mark_used(row, col)  # occupy col in row
                 self.solve_recurse(row + 1)  # fill consequent rows
