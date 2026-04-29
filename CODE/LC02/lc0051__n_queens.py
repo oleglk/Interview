@@ -42,3 +42,46 @@ class NQueensStatus:
 ####
 
         
+class NQueens:
+    def __init__(self, n: int):
+        self.n = n
+        self.status = NQueensStatus(n)
+        self.results = []
+    ##
+
+    def solve_recurse(self, row: int) -> None:
+        """Recursively place queens row by row using backtracking."""
+        if ( row == self.n ):  # one solution obtained
+            # convert board to list of per-row strings
+            solutionListOfStr = ["".join(oneRowList) for oneRowList in self.status.board]
+            self.results.append(solutionListOfStr)
+            return
+
+        # try placing queen in all columns of 'row'
+        for col in range(0, self.n):
+            if ( self.status.cell_is_safe(row, col) ):
+                self.status.mark_used(row, col)  # occupy col in row
+                self.solve_recurse(row + 1)  # fill consequent rows
+                self.status.mark_unused(row, col)  # free col in row
+    ##
+
+    def do_job(self) -> list:
+        self.solve_recurse(0)
+        return self.results
+    ##
+
+    @staticmethod
+    def solve(n: int) -> list:
+        solver = NQueens(n)
+        return solver.do_job()
+####
+
+
+def test__NQueens():
+    tasks = [2, 3, 4]
+    for n in tasks:
+        print("==========================================")
+        print(f"n = {n}")
+        res = NQueens.solve(n)
+        print(f"Result: {res}")
+##
