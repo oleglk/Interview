@@ -80,7 +80,7 @@ class NQueens:
 
 
 def test__NQueens():
-    tasks = [2, 3, 4]
+    tasks = [1, 2, 3, 4]
     for n in tasks:
         print("==========================================")
         print(f"n = {n}")
