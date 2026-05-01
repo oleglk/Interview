@@ -8,6 +8,7 @@
 # import importlib; import lc0053__max_subarray_sum; importlib.reload(lc0053__max_subarray_sum); from lc0053__max_subarray_sum import *
 
 # The idea: check best sum ending at each number. If prefix sum <= 0, restart subarray.
+# See https://algo.monster/liteproblems/53
 
 
 def max_subarray_sum(nums: list[int]) -> int:
