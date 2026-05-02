@@ -8,6 +8,7 @@
 # import importlib; import lc0054__spiral_matrix; importlib.reload(lc0054__spiral_matrix); from lc0054__spiral_matrix import *
 
 # The idea: walk along squeezing borders.
+# See https://www.geeksforgeeks.org/dsa/print-a-given-matrix-in-spiral-form/
 
 
 def spiral_matrix(mat: list[list[int]]) -> list[int]:
