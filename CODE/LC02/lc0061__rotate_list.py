@@ -14,6 +14,7 @@
 # - calculate k %= n
 # - find the break position using fast- and slow pointers
 # - break and reconnect the list
+# See https://algo.monster/liteproblems/61
 
 from UTILS.lib__linked_list import *
 
