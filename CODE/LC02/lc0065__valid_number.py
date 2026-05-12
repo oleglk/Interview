@@ -20,6 +20,7 @@
 # The digits are defined as one or more digits.
 
 # The idea: traverse the string while maintaining flags of seen stuff and checking error conditions. Upon exponent reset flags of sign, dot and digits.
+# See: https://dev.to/seanpgallivan/solution-valid-number-3gf5
 
 
 def valid_number(s: str) -> bool:
