@@ -10,6 +10,7 @@
 
 
 # The idea: recursion, for each number try including and not including it.
+# See https://algo.monster/liteproblems/77
 
 class Combinations:
     def __init__(self, n: int, k: int) -> None:
