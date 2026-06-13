@@ -14,9 +14,11 @@
 # RELOAD:
 # import importlib; import lc0097__interleaving_string; importlib.reload(lc0097__interleaving_string); from lc0097__interleaving_string import *
 
-# The idea: TODO
+# The idea: if current char of s1 matches, continue with substring after it; same for s2.
 # See https://www.geeksforgeeks.org/dsa/find-if-a-string-is-interleaved-of-two-other-strings-dp-33/
 
+
+# Returns True if s3 is interleaving of s1 and s2.
 def interleaving_string_recurse(s1: str, s2: str, s3: str, i: int, j: int, memo: dict) -> bool:
     k = i + j  # current index in s3
     m = len(s1);  n = len(s2)
