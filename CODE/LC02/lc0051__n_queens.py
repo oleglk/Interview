@@ -1,4 +1,5 @@
 # lc0051__n_queens.py
+# The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
 # Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
 # Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
 
@@ -13,6 +14,11 @@
 # (All cells on SW-NE diagonal have same (row+col);  all cells on NW-SE anti-diagonal have same (n-row+col).)
 # See https://algo.monster/liteproblems/51
 
+# Diagonals (SW-NE); count = 7 == 2*4-1
+# 0123
+# 1234
+# 2345
+# 3456
 
 class NQueensStatus:
     def __init__(self, n: int) -> None:
@@ -23,7 +29,7 @@ class NQueensStatus:
         # Need 2*n-1 positions for index 2*n-2; 2*n positions for index 2*n-1
         # diagonal indices == [0 + 0  ...   (n-1) + (n-1)] -> 2n-1 positions
         self.usedDiagonals = [0]*(2*n-1)
-        # anti-diagonal indices = [n - (n-1) + 0  ...  n - 0 + n-1] == [1...2n-1] -> 2n-1 positions
+        # anti-diagonal indices = [n - (n-1) + 0  ...  n - 0 + n-1] == [1...2n-1] -> 2n-1 positions (idx 0 unused, idx 2n-1 used; need size 2n)
         self.usedAntiDiagonals = [0]*(2*n)
 
     def mark_used(self, row: int, col: int) -> None:
@@ -51,7 +57,8 @@ class NQueens:
     ##
 
     def solve_recurse(self, row: int) -> None:
-        """Recursively place queens row by row using backtracking."""
+        """Recursively place queens row by row using backtracking.
+           E.g. choose position in each row."""
         if ( row == self.n ):  # one solution obtained
             # convert board to list of per-row strings
             solutionListOfStr = ["".join(oneRowList) for oneRowList in self.status.board]
