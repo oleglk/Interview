@@ -1,5 +1,5 @@
 # lc0053__max_subarray_sum.py
-# Given an integer array nums, find the with the largest sum, and return its sum.
+# Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0053__max_subarray_sum import *
