@@ -32,6 +32,8 @@ def insert_interval(intervals: [list[int,int]], newInterval: list[int,int]) -> l
         resList.append(newInterval)
         return resList
     # #currI is the 1st old interval that ends after newInterval begins
+    # (no more intervals ending before newInterval begins are possible
+    #  because intervals don't overlap)
     # merge all intervals that start before new (merged) interval ends
     while ( (currI < n) and (intervals[currI][0] <= newInterval[1]) ):
         # #currI begins before newInterval ends - e.g. they overlap
