@@ -9,6 +9,7 @@
 # import importlib; import lc0063__unique_paths; importlib.reload(lc0063__unique_paths); from lc0063__unique_paths import *
 
 # The idea: use DP. dp[0][i] = dp[i][0] = 1. For other cells dp[i][j] = dp[i-1][j] + dp[i][j-1]. The answer will be in the bottom-right corner.
+# dp[i][j] == number of ways to reach cell #i,j; last step is either from left or from above; for 1st row last step is from left; for 1st column last step is from above.
 # See https://algo.monster/liteproblems/62
 
 
