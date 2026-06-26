@@ -15,7 +15,9 @@
 # - If w1[m-1] == w2[n-1], match remaining prefixes - recurse(m-1, n-1)
 # - If w1[m-1] != w2[n-1], take 1 + minimum of 3 operations:
 # -- delete w1[m-1], match w1[0..m-2] with w2[0..n-1] - recurse(m-1, n)
+# ---- (compare up to before the deleted char)
 # -- insert w2[n-1] into w1, match w1[0..m-1] with w2[0..n-2] - recurse(m, n-1)
+# ---- (compare up to before the inserted char)
 # -- replace w1[m-1] by w2[n-1], match w1[0..m-2] with w2[0..n-2] - recurse(m-1, n-1)
 # See https://www.geeksforgeeks.org/dsa/edit-distance-dp-5/
 
