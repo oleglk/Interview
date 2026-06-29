@@ -30,7 +30,7 @@ def word_search(board: list[list[int]], word: str) -> bool:
 def word_search_recurse(board: list[list[int]], word: str, row: int, col: int, startIdx: int) -> bool:
     m = len(board)
     n = len(board[0])
-    # check base case of word fully matched
+    # check base case of word fully matched; important to check it first
     if ( startIdx == len(word) ):
         return True
     # check base cases of going out of boundary
@@ -48,7 +48,7 @@ def word_search_recurse(board: list[list[int]], word: str, row: int, col: int, s
     resDown  = word_search_recurse(board, word, row+1, col,   startIdx+1)
     resLeft  = word_search_recurse(board, word, row,   col-1, startIdx+1)
     resUp    = word_search_recurse(board, word, row-1, col,   startIdx+1)
-    board[row][col] = saved  # restpre the current cell
+    board[row][col] = saved  # restore the current cell
     return resRight or resDown or resLeft or resUp
 ##
 
