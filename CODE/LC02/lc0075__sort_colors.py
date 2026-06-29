@@ -8,7 +8,7 @@
 # RELOAD:
 # import importlib; import lc0075__sort_colors; importlib.reload(lc0075__sort_colors); from lc0075__sort_colors import *
 
-# The idea: indices after0 and before2 mark boundaries red-white and white-blue. Move index curr through the array and swap object at curr with either that of after0 or before2 depending on the color at curr; advance boundary index. I color is 1, just move further. Finish when curr > before2.
+# The idea: indices after0 and before2 mark boundaries red-white and white-blue. Move index curr through the array and swap object at curr with either that of after0 or before2 depending on the color at curr; advance boundary index. If color is 1, just move further. Finish when curr > before2.
 # See https://www.geeksforgeeks.org/dsa/sort-an-array-of-0s-1s-and-2s/
 
 
@@ -20,8 +20,8 @@ def sort_colors(nums: list[int]) -> list[int]:
         if ( nums[curr] == 0 ):
             nums[curr], nums[after0] = nums[after0], nums[curr]
             after0 += 1
-            curr += 1  # can advance since we leave 0 or 1 behind curr
-            # don't advance curr since nums[curr] isn't yet checked
+            curr += 1  # can advance, since we leave 0 or 1 behind curr
+                       # e.g. we already checked the number swapped into curr
         elif ( nums[curr] == 2 ):
             nums[curr], nums[before2] = nums[before2], nums[curr]
             before2 -= 1
