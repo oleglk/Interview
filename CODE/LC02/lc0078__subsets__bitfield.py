@@ -1,13 +1,13 @@
-# lc0078__subsets.py
+# lc0078__subsets__bitfield.py
 # Given an integer array nums of unique elements, return all possible subsets (the power set).
 # The solution set must not contain duplicate subsets. Return the solution in any order.
 # Constraint: 1 <= nums.length <= 10
 
 # LOAD:
-# import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0078__subsets import *
+# import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0078__subsets__bitfield import *
 
 # RELOAD:
-# import importlib; import lc0078__subsets; importlib.reload(lc0078__subsets); from lc0078__subsets import *
+# import importlib; import lc0078__subsets__bitfield; importlib.reload(lc0078__subsets__bitfield); from lc0078__subsets__bitfield import *
 
 # The idea: subsets correspond to 0|1 bits in numbers 0 .. (2^n)-1.
 
