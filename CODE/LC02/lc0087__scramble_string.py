@@ -26,6 +26,8 @@ def is_scramble(s1: str, s2: str) -> bool:
 
     # recursive cases with all possible split positions
     n = len(s1)
+    # with range(1,n) and [:i], min 1st part is {0}, max 1st part is {0...n-2},
+    # => min 2nd part is {n-1}, max 2nd part is {1...n-1} => symmetry achieved
     for i in range(1, n):  # in the source: (1,n); (0,n) and (1,n-1) don't work
         notSwapped = is_scramble(s1[:i], s2[:i]) and is_scramble(s1[i:], s2[i:])
         # 12,345 ->swap(2)-> 345,12 => is_scramble(12,12) && is_scramble(345,345)
