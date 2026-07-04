@@ -28,7 +28,10 @@ def is_scramble(s1: str, s2: str) -> bool:
     n = len(s1)
     for i in range(1, n):  # in the source: (1,n); (0,n) and (1,n-1) don't work
         notSwapped = is_scramble(s1[:i], s2[:i]) and is_scramble(s1[i:], s2[i:])
-        # 12,345 ->swap(2)-> 345,12
+        # 12,345 ->swap(2)-> 345,12 => is_scramble(12,12) && is_scramble(345,345)
+        # 12,345 ->swap(2)-> 453,21 => is_scramble(12,21) && is_scramble(345,453)
+        # n=5, i=2 => [0,2) - 2 chars, [5-2,5) - 2 chars
+        # n=5, i=2 => [2,5) - 3 chars, [0,5-2) - 3 chars
         swapped = is_scramble(s1[:i], s2[n-i:]) and is_scramble(s1[i:], s2[:n-i])
         if ( swapped or notSwapped ):
             return True
