@@ -7,8 +7,9 @@
 # RELOAD:
 # import importlib; import lc0085__maximal_rectangle; importlib.reload(lc0085__maximal_rectangle); from lc0085__maximal_rectangle import *
 
-# The idea: bring this problem to lc0084__largest_rectangle_in_histogram.
+# The idea: bring this problem to lc0084__largest_rectangle_in_histogram per a row.
 # Grow the rectangles starting from upper row downwards: if value in the matrix is 1, add 1 to column height; if value is 0, reset column height to zero.
+# Treat current row as the base of the currrent histogram (histogram bars go upward from the current row).
 # Example:
 # 0111  -> heights = (0,1,1,1) -> solve for 1 row
 # 0011  -> heights = (0,0,2,2) -> solve for 2 rows
