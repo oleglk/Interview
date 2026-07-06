@@ -19,6 +19,8 @@ def reverse_linked_list_2(head: Node, left: int, right: int) -> Node:
     if ( head is None ):  return None
     dummy = Node(-1)
     dummy.next = head
+    ## TODO: treat the case of 'right' being too large
+    ##       for instance count elements and set right = min(right, n)
     # find begin of the section to reverse - node just before it
     prev = dummy
     for _ in range(0, left-1):
@@ -26,20 +28,24 @@ def reverse_linked_list_2(head: Node, left: int, right: int) -> Node:
         prev = prev.next
     beforeReverse = prev
     firstReversed = prev.next  # will become last reversed
+    # 1,2,3,4,5; l=3, r=4 --> beforeReverse=2, firstReversed=3
 
     # reverse the section
-    curr = prev.next
+    curr = prev.next  # 1,2,3,4,5; l=3, r=4 --> curr=3
     for _ in range(0, right - left + 1):  # ? why not (right-left) ?
+        # 1,2,3,4,5; l=3, r=4 --> cyckle performed for curr=3,4
         tmpNext = curr.next
         curr.next = prev
         prev = curr
         curr = tmpNext
-    # prev is the last made pointing backward
+    # prev is the last made pointing backward - now 1st in reversed section
     # curr is the first node after reversed section
+    # 1,2,3,4,5; l=3, r=4 --> 1->2, 2->3, 3->2, 4->3, 5->None, prev=4, curr=5
 
     # reconnect new begin and end of the reversed section
-    beforeReverse.next = prev
-    firstReversed.next = curr
+    beforeReverse.next = prev  # 2->4
+    firstReversed.next = curr  # 3->5
+    # 1,2,3,4,5; l=3, r=4 --> 1->2->4->3->5->None
 
     return dummy.next
 ##
