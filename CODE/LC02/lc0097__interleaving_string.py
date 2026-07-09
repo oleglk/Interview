@@ -24,7 +24,7 @@ def interleaving_string_recurse(s1: str, s2: str, s3: str, i: int, j: int, memo:
     m = len(s1);  n = len(s2)
 
     # check base case of finished string
-    if ( (i == m) and (j == n) and (k == (m + n)) ):  # all matched
+    if ( (i == m) and (j == n) and (k == len(s3)) ):  # all matched
         return True
     # check base case of exhausted s3 while s1 and/or s2 not finished
     if ( ((i < m) or (j < n)) and (k >= len(s3)) ):
