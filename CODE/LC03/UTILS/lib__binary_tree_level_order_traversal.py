@@ -32,7 +32,7 @@ class Queue:
 ##
 
 
-def binary_tree_level_order(root: Node):
+def binary_tree_level_order(root: Node, includeNone: bool = False):
     """Traversal of binary tree nodes from left to right, level by level.
        Returns list of lists of per-level node-data values."""
     if (root is None):
@@ -48,11 +48,18 @@ def binary_tree_level_order(root: Node):
             # traverse one level of the tree - distinguished by count
             # enqueue the next level
             node = queue.dequeue()
+            if ( node is None ):  # posible only if includeNone=True
+                levelNodes.append(None)
+                continue
             levelNodes.append(node.data)
             if ( node.left is not None ):
                 queue.enqueue(node.left)
+            elif ( includeNone ):
+                queue.enqueue(None)
             if ( node.right is not None ):
                 queue.enqueue(node.right)
+            elif ( includeNone ):
+                queue.enqueue(None)
         resListOfLists.append(levelNodes)  # done with current level
     return(resListOfLists)
 
