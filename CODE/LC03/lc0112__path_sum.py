@@ -8,6 +8,8 @@
 # import importlib;    import lc0112__path_sum;  importlib.reload(lc0112__path_sum);  from lc0112__path_sum import *
 
 # The idea: recursion while subtracting current node value from remaining sum; if remaining sum becomes zero, the path is found.
+# See https://www.geeksforgeeks.org/dsa/root-to-leaf-path-sum-equal-to-a-given-number/
+
 
 from UTILS.lib__binary_tree_level_order_traversal import *  # for "visualization"
 
