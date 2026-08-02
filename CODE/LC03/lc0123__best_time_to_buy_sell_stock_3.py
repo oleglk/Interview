@@ -10,6 +10,7 @@
 # import importlib;    import lc0123__best_time_to_buy_sell_stock_3;  importlib.reload(lc0123__best_time_to_buy_sell_stock_3);  from lc0123__best_time_to_buy_sell_stock_3 import *
 
 # The idea: recursion with the following parameters: dayIndex, buyOrCellState, numTransactionsLeft. On each day choose best btw performing and not performing the permitted action (buy or cell).
+# See https://codeanddebug.in/blog/best-time-to-buy-and-sell-stock-iii/
 
 
 def best_time_to_buy_sell_stock_3(prices: list[float]) -> float:
