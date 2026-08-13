@@ -27,16 +27,31 @@ def palindrome_partitioning_2(s: str) -> int:
 
     n = len(s)
     isPalindrome = precompute_palindromes()
-    cuts = [float('inf')*n]  # cuts[i] = min num of cuts for s[0..i]
+    cuts = [float('inf')] * n  # cuts[i] = min num of cuts for s[0..i]
 
     for i in range(0, n):  # check prefixes of increasing length
         if ( isPalindrome[0][i] ):  # entire prefix is palindrome
             cuts[i] = 0
         else:
             # try every split at [0..i-1]
-            for ( j in range(0, i) ):
+            for j in range(0, i):
                 if ( isPalindrome[j+1][i] ):  # palindrome to the right of split
-                    cuts[i] = min(cuts[i], (cuts[j] + 1))  # prefix + cut at j
+                    # consider cuts of prefix [0..j] + one cut at j
+                    cuts[i] = min(cuts[i], (cuts[j] + 1))
 
     return cuts[n-1]
+##
+
+
+def test__palindrome_partitioning_2():
+    tasks = [
+        "aab",    # 1
+        "a",      # 0
+        "ab",     # 1
+    ]
+    for s in tasks:
+        print("===============================================")
+        print(f"Input: {s}")
+        res = palindrome_partitioning_2(s)
+        print(f"Result: {res}")
 ##
