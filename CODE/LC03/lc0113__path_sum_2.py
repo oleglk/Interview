@@ -23,7 +23,7 @@ class TreeNode:
 
 def find_paths_for_sum(root: TreeNode, targetSum: int) -> list[list[int]]:
     def find_paths_recurse(root: TreeNode, currentSum: int) -> None:
-        nonlocal currentPath
+        nonlocal currentPath, result
         if ( root is None ):
             return
         currentSum += root.data
