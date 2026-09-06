@@ -35,6 +35,7 @@ def populate_next_right_pointers(root: Node|None) -> None:
     if ( root is None ):
         return
     leftmost = root
+    # tree is perfect, if one node at next level exists, entire next level exists
     while ( leftmost.left is not None ):  # entire next level available
         head = leftmost
         while ( head is not None ):  # traverse the current level
