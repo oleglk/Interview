@@ -1,5 +1,6 @@
 # lc0115__distinct_subsequences.py
 # Given two strings s and t, return the number of distinct subsequences of s which equals t.
+# A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0115__distinct_subsequences import *
@@ -15,7 +16,7 @@ def distinct_subsequences(s: str|None, t: str|None) -> int:
     def distinct_subsequences_recurse(i: int, j: int) -> int:
         """Searches for subsequences in strings of lengths i, j from beginning"""
         # base cases
-        if ( j == 0 ):  # found complete subsequence - take nothing more
+        if ( j == 0 ):  # matched all of t - take nothing more
             return 1
         if ( i == 0 ):  # s exhausted while no subsequence completed - no way
             return 0
