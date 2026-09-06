@@ -24,21 +24,25 @@ class TreeNode:
 
 
 def flatten_binary_tree(root: TreeNode|None) -> None:
-    # base cases
+    # base case
     if ( root is None ):
         return
+    
+    # find rightmost node in unflattened left subtree - go right until None
+    # (the result is the same as in flattened subtree, but works faster)
+    lastInLeft = root.left
+    if ( root.left is not None ):
+        while ( lastInLeft.right is not None ):
+            lastInLeft = lastInLeft.right
+
+    # right subtree should be flatttened even if left subtree inexistent
+    flatten_binary_tree(root.left)
+    flatten_binary_tree(root.right)
+
     if ( root.left is None ): # if no left subtree, this node needs no processing
         return
 
-    # left subtree exists - recursive case
-    flatten_binary_tree(root.left)
-    flatten_binary_tree(root.right)
-    # find last node in the flattened left subtree - go right until None
-    lastInLeft = root.left
-    while ( lastInLeft.right is not None ):
-        lastInLeft = lastInLeft.right
-
-    # reconnect
+    # left subtree exists and is already flattened - reconnect
     lastInLeft.right = root.right
     root.right = root.left
     root.left = None
