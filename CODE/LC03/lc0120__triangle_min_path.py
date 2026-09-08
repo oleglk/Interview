@@ -8,11 +8,11 @@
 # RELOAD:
 # import importlib;    import lc0120__triangle_min_path;  importlib.reload(lc0120__triangle_min_path);  from lc0120__triangle_min_path import *
 
-# The idea: bottom-up DP where DP[i][j] = DP[i][j] + min(DP[i+1][j], DP[i+1][j+1]. The result is in DP[0][0]. TO save space, modify 'triangle' array in place.
+# The idea: bottom-up DP where DP[i][j] = DP[i][j] + min(DP[i+1][j], DP[i+1][j+1]). The result is in DP[0][0]. TO save space, modify 'triangle' array in place.
 # The solution suggested by Gemini AI.
 
 
-def triangle_min_path(triangle: list[int]) -> int:
+def triangle_min_path(triangle: list[list[int]]) -> int:
     # process rows starting from the one above bottom-most
     for row in range(len(triangle)-2, -1, -1):
         # (each next row has one more columns, so [i+1][j+1] is safe)
