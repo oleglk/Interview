@@ -27,6 +27,7 @@ def pascal_triangle_get_row(rowIndex: int) -> list[int]:
     # generate rows up to 'rowIndex'
     for row in range(2, rowIndex+1):
         # traverse right-to-left to preserve prev-row elements until they are used
+        # (calc of 4 uses 4 and 3, changes 4; then calc of 3 uses 3 and 2)
         # edge elements already set to 1, so calc only middle elements
         for pos in range(row-1, 0, -1):
             oneRow[pos] = oneRow[pos] + oneRow[pos-1]
