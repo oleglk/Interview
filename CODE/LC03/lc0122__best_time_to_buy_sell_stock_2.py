@@ -9,7 +9,7 @@
 # RELOAD:
 # import importlib;    import lc0122__best_time_to_buy_sell_stock_2;  importlib.reload(lc0122__best_time_to_buy_sell_stock_2);  from lc0122__best_time_to_buy_sell_stock_2 import *
 
-# The idea: max [rpfot achieved if buy-cell every time today's price is larger than yesterday's.
+# The idea: max profit achieved if buy-cell every time today's price is larger than yesterday's.
 # See: https://techsauce.medium.com/best-time-to-buy-and-sell-stock-ii-popular-coding-interview-question-cc68026a0ff2
 
 
