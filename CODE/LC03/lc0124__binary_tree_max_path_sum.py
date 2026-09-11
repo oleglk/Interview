@@ -37,6 +37,8 @@ def binary_tree_max_path_sum(root: Node) -> int:
         # leftVal and rightVal are lengths of 1-sided subpaths
 
         # update global max with best of 2-sided and 1-sided paths
+        # max(0, ...) drops negative subpaths; for the case of all negative paths
+        #   the max 1-node subpath itself is still updated in 'maxVal'
         maxVal = max(maxVal, root.data + max(0, leftVal) + max(0, rightVal))
 
         # send upwards to the caller the best of 1-sided paths
