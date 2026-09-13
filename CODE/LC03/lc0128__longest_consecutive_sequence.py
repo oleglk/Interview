@@ -1,6 +1,9 @@
 # lc0128__longest_consecutive_sequence.py
 # Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 # You must write an algorithm that runs in O(n) time.
+## Example:
+## Input: [100, 4, 200, 1, 3, 2]   Output: 4
+## Explanation: The longest consecutive sequence is [1, 2, 3, 4].
 
 # LOAD:
 # import sys;  import os;  sys.path.insert(0, os.getcwd());  from lc0128__longest_consecutive_sequence import *
@@ -29,6 +32,8 @@ def longest_consecutive_sequence(nums: list[int]) -> int:
 
     return result
 ##
+### Why it runs in O(N):
+### Building the set takes O(n). Although there is a nested while loop, each number is only visited at most twice across the entire execution (once during the outer loop, and once inside the while loop).
 
 
 def test__longest_consecutive_sequence():
