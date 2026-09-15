@@ -20,6 +20,8 @@ def palindrome_partitioning(s: str) -> list[str]:
         # discover palindromes starting from length = 1
         for lng in range(1, n+1):
             for beg in range(0, n - lng + 1):
+                # [i ... i + lng - 1] is palindrome if s[i] == s[i + lng - 1]
+                #   and inner substring is palindrome (or length <= 2).
                 dp[beg][beg + lng - 1] = (s[beg] == s[beg + lng - 1]) and \
                      ((beg + 1 > beg + lng - 2) or dp[beg + 1][beg + lng - 2])
         return dp
