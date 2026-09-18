@@ -20,6 +20,8 @@ def palindrome_partitioning_2(s: str) -> int:
         # discover palindromes starting from length = 1
         for lng in range(1, n+1):
             for beg in range(0, n - lng + 1):
+                # [beg ... beg + lng-1] is palindrome if s[beg] == s[beg + lng-1]
+                #   and inner substring is palindrome (or length <= 2).
                 dp[beg][beg + lng - 1] = (s[beg] == s[beg + lng - 1]) and \
                      ((beg + 1 > beg + lng - 2) or dp[beg + 1][beg + lng - 2])
         return dp
@@ -27,7 +29,7 @@ def palindrome_partitioning_2(s: str) -> int:
 
     n = len(s)
     isPalindrome = precompute_palindromes()
-    cuts = [float('inf')] * n  # cuts[i] = min num of cuts for s[0..i]
+    cuts = [float('inf')] * n  # cuts[i] = min num of cuts to partition s[0..i]
 
     for i in range(0, n):  # check prefixes of increasing length
         if ( isPalindrome[0][i] ):  # entire prefix is palindrome

@@ -9,7 +9,7 @@
 # RELOAD:
 # import importlib;    import lc0137__single_number_2;  importlib.reload(lc0137__single_number_2);  from lc0137__single_number_2 import *
 
-# The idea: work bit by bit. If sum of a particular bit is divisible by 3, single number has it as 0, otherwise as 1. Compose the result of individual bits. Unclear trick for setting bit #31.
+# The idea: work bit by bit - calc sums of individual bits. If sum of a particular bit is divisible by 3, single number has it as 0, otherwise as 1. Compose the result of individual bits. Unclear trick for setting bit #31 (|(1<<31) just makes infinite positive number larger).
 # See: https://algo.monster/liteproblems/137
 
 
