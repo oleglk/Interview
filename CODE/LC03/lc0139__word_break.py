@@ -8,7 +8,7 @@
 # RELOAD:
 # import importlib;    import lc0139__word_break;  importlib.reload(lc0139__word_break);  from lc0139__word_break import *
 
-# The idea: DP. DP[i]==True if some valid breaking ends at i-1. This means existent word ands at i-1 and a valid breaking ends before this word, the latter equals DP[word_begin].
+# The idea: DP. DP[i]==True if some valid breaking ends at i-1. This means existent word ends at i-1 and a valid breaking ends before this word, the latter equals DP[word_begin].
 # See: https://www.geeksforgeeks.org/dsa/word-break-problem-dp-32/#expected-approach-2-using-bottom-up-dp-onmk-time-and-on-space
 
 
@@ -22,6 +22,7 @@ def word_break(s: str, wordList: list[str]) -> bool:
     # check every position in the string to be next to word end
     for i in range(1, n+1):
         # check every word to be able to finish before #i
+        #   AND whether the prefix before this word is also breakable
         for word in wordList:
             wordStart = i - len(word)
             if ( (wordStart >= 0) and (s[wordStart : i] == word) and \
