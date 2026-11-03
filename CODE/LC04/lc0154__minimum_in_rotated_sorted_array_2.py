@@ -13,6 +13,7 @@
 
 # The idea: binary search while detecting on which side is the "break".
 # But if element at middle equals that on right, right -= 1
+#   E.g. 1,2,3,3,3 or 3,1,2,3,3,3,3 or 3,3,3,3,1,2,3
 # See: https://algo.monster/liteproblems/154
 
 
