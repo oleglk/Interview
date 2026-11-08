@@ -22,8 +22,9 @@ def maximum_gap(nums: list[int]) -> int:
     minVal = min(nums)
     maxVal = max(nums)
     if ( minVal == maxVal ):  return 0
-    # set bucket size to average gap, which should be smaller than max gap
+    # set bucket size to average gap, which should be SMALLER than max gap
     bucketSize = (maxVal - minVal) // (n - 1)  # for [1,3,5] want bucketSize=2
+    # seems like "bucketSize = (maxVal - minVal) // n" must work too
     bucketsNum = (maxVal - minVal) // bucketSize + 1  # for [1,3,5] want =3
     #print(f"bucketSize={bucketSize}, bucketsNum={bucketsNum}")
 
@@ -37,10 +38,7 @@ def maximum_gap(nums: list[int]) -> int:
         minInBucketList[bucketI] = min(minInBucketList[bucketI], val)
         maxInBucketList[bucketI] = max(maxInBucketList[bucketI], val)
 
-    # just in case - find max gap inside buckets
     maxGap = float('-inf')
-    for bucketI in range(0, bucketsNum):
-        maxGap = max(maxGap, maxInBucketList[bucketI] - minInBucketList[bucketI])
 
     # find max gap between consecutive populated buckets
     #      - between prev max and next min
