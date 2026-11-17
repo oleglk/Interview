@@ -22,6 +22,7 @@ def compare_version_numbers(version1: str, version2: str) -> int:
     # compare while any string has characters left
     while ( (i1 < n1) or (i2 < n2) ):
         revision1 = 0;  revision2 = 0
+        # (nothing accumulated at leading 0-s, since revision* == 0)
         # parse and accumulate current revision field from version1
         while ( (i1 < n1) and (version1[i1] != ".") ):
             revision1 = 10 * revision1 + int(version1[i1])

@@ -7,7 +7,7 @@
 # RELOAD:
 # import importlib;    import lc0191__number_of_1_bits;  importlib.reload(lc0191__number_of_1_bits);  from lc0191__number_of_1_bits import *
 
-# The idea: (n-1) has all bits starting from rightmost 1 rightwards reversed vs those of n; (n & (n-1)) nullifies all these bits. Count how many times one can perform (n & (n-1)) until n becomes zero.
+# The idea: (n-1) has all bits starting from rightmost 1 rightwards reversed vs those of n; (n & (n-1)) nullifies all these bits. Essentially each time we perform n = n & (n - 1), we remove exactly one set bit from n. Count how many times one can perform (n & (n-1)) until n becomes zero.
 # See: https://algo.monster/liteproblems/191
 
 
