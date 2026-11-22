@@ -13,6 +13,7 @@
 # import importlib;    import lc0202__happy_number;  importlib.reload(lc0202__happy_number);  from lc0202__happy_number import *
 
 # The idea: run the loop of replacement by sum of squares of digits. If 1 reached, return True. If cycle detected, return False. The reason it works: possible number of values is restricted - [1, 9^2+...+9^2].
+# See: https://algo.monster/liteproblems/202
 
 
 def happy_number(n: int) -> bool:
